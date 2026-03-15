@@ -4,3 +4,5 @@
 .trash
 *.log
 *.bit
+.DS_Store
+Thumbs.db
