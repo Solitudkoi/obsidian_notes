@@ -1,3 +1,6 @@
 .obsidian/workspace*
 .obsidian/cache
+.obsidian/plugins/obsidian-git/data.json
 .trash
+*.log
+*.bit
