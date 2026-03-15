@@ -1,0 +1,20 @@
+### 论文笔记模板
+
+**Paper title**  
+**Venue / Year**  
+**One-sentence summary**：这篇论文一句话讲什么
+
+**1. Problem**  
+现有方法的瓶颈是什么？
+
+**2. Key idea**  
+它提出了什么设计？
+
+**3. Why it works**  
+为什么这个设计有效？
+
+**4. Key numbers**  
+最重要的 2–3 个数字
+
+**5. One figure worth using**  
+最适合放进 PPT 的图是哪张？

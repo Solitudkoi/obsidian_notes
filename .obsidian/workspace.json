@@ -1,0 +1,234 @@
+{
+  "main": {
+    "id": "58ab545e6969ea43",
+    "type": "split",
+    "children": [
+      {
+        "id": "6759a417dd021fea",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "581e5e1c0cb365c2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "未命名.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "未命名"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b1aa61ec23700b02",
+    "type": "split",
+    "children": [
+      {
+        "id": "b3d6579b5aabb866",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "da1a5af6d39dbf72",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "02386d748b180e29",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "Pasted image 20260102143154.png",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "6cf8b2f9188bbf54",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "cca120ef000dbe32",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae58cf979906858d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "444fe755e523aeab",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "杂/青志/纳新/短信.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "短信 的反向链接列表"
+            }
+          },
+          {
+            "id": "670332e75e900ffe",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "杂/青志/纳新/短信.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "短信 的出链列表"
+            }
+          },
+          {
+            "id": "84e9fd23181e9d66",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "0fd904a801a15b12",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "FDS project3/PR版本.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "PR版本 的大纲"
+            }
+          },
+          {
+            "id": "e045846f6df0a92f",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:新建数据库": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "581e5e1c0cb365c2",
+  "lastOpenFiles": [
+    "未命名.md",
+    "notes/README.md",
+    "notes",
+    "未命名.base",
+    "obsidian_notes",
+    "STUDY/reading_paper/reading_notes.md",
+    "STUDY/reading_paper/resding_methods.md",
+    "STUDY/reading_paper/P1.md",
+    "STUDY/reading_paper/P2.md",
+    "STUDY/reading_paper/Algorithm-Hardware Co-Design for Efficient Brain-Inspired Hyperdimensional Learning on Edge.md",
+    "STUDY/reading_paper/启真问学.md",
+    "STUDY/reading_paper/类脑计算、感知和智能关键技术路线图-v16.md",
+    "STUDY/reading_paper/记录模板.md",
+    "STUDY/大二下/DB/hw2.md",
+    "储存/图片/Pasted image 20260314130500.png",
+    "储存/图片/Pasted image 20260314130438.png",
+    "储存/图片/Pasted image 20260314130228.png",
+    "STUDY/大二下/DIP/lab1.md",
+    "储存/图片/Pasted image 20260313102309.png",
+    "STUDY/大二下/毛概/《井冈山的斗争》内容大纲.md",
+    "STUDY/大二下/毛概/历史语境深读——《井冈山的斗争》为什么在1928年11月必须写给中央.md",
+    "STUDY/大二下/毛概/文本深读——《井冈山的斗争》到底在论证什么.md",
+    "STUDY/大二下/毛概/《井冈山的斗争》分析报告.md",
+    "STUDY/大二下/DB/lab/lab4.md",
+    "STUDY/大二下/DB/lab/lab6.md",
+    "STUDY/大二下/毛概",
+    "STUDY/大二下/DB/lab/lab5.md",
+    "STUDY/大二下/DB/lab/lab3.md",
+    "STUDY/大二下/DB/lab/lab2.md",
+    "STUDY/大二下/DB/lab/lab1.md",
+    "STUDY/大二下/CA/lab1.md",
+    "STUDY/大二下/OOP/HW1/hw1.md",
+    "STUDY/大二下/DB/lab",
+    "杂/青志/暑期支教/立项/三下乡立项.md",
+    "杂/青志/暑期支教/立项/立项表单.md",
+    "RECOVERY_CODE",
+    "STUDY/大二下/OOP/HW1",
+    "STUDY/大二下/DIP",
+    "STUDY/大二下/OOP",
+    "STUDY/大二下/DB",
+    "储存/图片/Pasted image 20260107193940.png",
+    "储存/图片/Pasted image 20260107115439.png",
+    "储存/图片/Pasted image 20260107093425.png",
+    "储存/图片/Pasted image 20260106144206.png",
+    "储存/图片/Pasted image 20260106144151.png",
+    "储存/图片/Pasted image 20260104205314.png",
+    "杂/未命名.canvas",
+    "未命名.canvas"
+  ]
+}
