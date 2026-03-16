@@ -1,3 +1,15 @@
+
+| 颜色        | 含义                      | 用途   |
+| --------- | ----------------------- | ---- |
+| 🟡 Yellow | Problem / Motivation    | 背景   |
+| 🟩 Green  | Key Idea / Contribution | 核心方法 |
+| 🟦 Blue   | Architecture / System   | 系统结构 |
+| 🟧 Orange | Results / Numbers       | 实验结果 |
+|           |                         |      |
+| 🟥 Red    | Limitations             | 不足   |
+| 🟪 Purple | Concepts                | 重要概念 |
+| ⚪ Gray    | Related work            | 扩展文献 |
+
 ### 第一轮，10–15 分钟扫读
 
 只看这些部分：
