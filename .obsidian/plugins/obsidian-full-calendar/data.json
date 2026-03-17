@@ -4,6 +4,11 @@
       "type": "local",
       "color": "#98ebad",
       "directory": "calendar"
+    },
+    {
+      "type": "ical",
+      "color": "#feffb8",
+      "url": "https://calendar.google.com/calendar/ical/jyue16587%40gmail.com/public/basic.ics"
     }
   ],
   "defaultCalendar": 0,
