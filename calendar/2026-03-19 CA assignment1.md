@@ -1,9 +1,9 @@
 ---
 title: CA assignment1
 allDay: false
-startTime: 16:30
-endTime: 18:30
-date: 2026-03-18
+startTime: 15:30
+endTime: 17:30
+date: 2026-03-19
 completed: false
 type: single
 ---
