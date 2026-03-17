@@ -1,14 +1,9 @@
 {
   "calendarSources": [
     {
-      "type": "local",
-      "color": "#98ebad",
-      "directory": "calendar"
-    },
-    {
       "type": "ical",
-      "color": "#feffb8",
-      "url": "https://calendar.google.com/calendar/ical/jyue16587%40gmail.com/public/basic.ics"
+      "color": "#c2e8bf",
+      "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics?token=GHSAT0AAAAAADWTAR3PSN5J3FSBQLS2NGPW2NYZAYQ"
     }
   ],
   "defaultCalendar": 0,
@@ -17,5 +12,5 @@
     "desktop": "timeGridWeek",
     "mobile": "timeGrid3Days"
   },
-  "timeFormat24h": false
+  "timeFormat24h": true
 }
