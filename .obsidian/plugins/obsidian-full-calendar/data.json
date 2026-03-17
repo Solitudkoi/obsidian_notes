@@ -1,14 +1,14 @@
 {
   "calendarSources": [
     {
-      "type": "ical",
-      "color": "#c2e8bf",
-      "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics?token=GHSAT0AAAAAADWTAR3PSN5J3FSBQLS2NGPW2NYZAYQ"
-    },
-    {
       "type": "local",
       "color": "#f1efb1",
       "directory": "calendar"
+    },
+    {
+      "type": "ical",
+      "color": "#d7f2cf",
+      "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics?token=GHSAT0AAAAAADWTAR3ORM7TGBVWME5TNEUE2NYZQIA"
     }
   ],
   "defaultCalendar": 0,
