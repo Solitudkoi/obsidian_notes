@@ -7,7 +7,12 @@
     },
     {
       "type": "ical",
-      "color": "#d7f2cf",
+      "color": "#b4e9e3",
+      "url": "https://calendar.google.com/calendar/embed?src=jyue16587%40gmail.com&ctz=America%2FNew_York"
+    },
+    {
+      "type": "ical",
+      "color": "#d7f1c5",
       "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics?token=GHSAT0AAAAAADWTAR3ORM7TGBVWME5TNEUE2NYZQIA"
     }
   ],
