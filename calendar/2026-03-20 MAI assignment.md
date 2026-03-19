@@ -1,8 +1,8 @@
 ---
-title: CA assignment1
+title: MAI assignment
 allDay: false
-startTime: 12:00
-endTime: 13:00
+startTime: 16:30
+endTime: 18:30
 date: 2026-03-20
 completed: false
 type: single
