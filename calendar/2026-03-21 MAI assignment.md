@@ -1,8 +1,8 @@
 ---
-title: lc
+title: MAI assignment
 allDay: false
-startTime: 14:00
-endTime: 15:30
+startTime: 16:30
+endTime: 18:30
 date: 2026-03-21
 completed: false
 type: single
