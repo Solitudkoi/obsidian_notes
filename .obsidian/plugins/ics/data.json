@@ -1,0 +1,59 @@
+{
+  "format": {
+    "timeFormat": "HH:mm",
+    "dataViewSyntax": false
+  },
+  "calendars": {
+    "ZJU": {
+      "icsName": "ZJU",
+      "icsUrl": "https://calendar.google.com/calendar/ical/jyue16587%40gmail.com/private-ec0e6c926d464a0e16c0a8802c81593f/basic.ics",
+      "ownerEmail": "",
+      "format": {
+        "checkbox": true,
+        "includeEventEndTime": true,
+        "icsName": true,
+        "summary": true,
+        "location": true,
+        "description": false,
+        "calendarType": "remote",
+        "showAttendees": false,
+        "showOngoing": false,
+        "showTransparentEvents": false
+      },
+      "calendarType": "remote"
+    }
+  },
+  "fieldExtraction": {
+    "enabled": true,
+    "patterns": [
+      {
+        "name": "Google Meet",
+        "pattern": "GOOGLE-CONFERENCE",
+        "matchType": "contains",
+        "priority": 1,
+        "extractedFieldName": "Video Call URLs"
+      },
+      {
+        "name": "Zoom",
+        "pattern": "zoom.us",
+        "matchType": "contains",
+        "priority": 2,
+        "extractedFieldName": "Video Call URLs"
+      },
+      {
+        "name": "Skype",
+        "pattern": "https:\\/\\/join\\.skype\\.com\\/[a-zA-Z0-9]+",
+        "matchType": "regex",
+        "priority": 3,
+        "extractedFieldName": "Video Call URLs"
+      },
+      {
+        "name": "Microsoft Teams",
+        "pattern": "https:\\/\\/teams\\.microsoft\\.com\\/l\\/meetup-join\\/[^>]+",
+        "matchType": "regex",
+        "priority": 4,
+        "extractedFieldName": "Video Call URLs"
+      }
+    ]
+  }
+}
