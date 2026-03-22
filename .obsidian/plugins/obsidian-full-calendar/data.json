@@ -2,18 +2,13 @@
   "calendarSources": [
     {
       "type": "local",
-      "color": "#f1efb1",
+      "color": "#f0efd0",
       "directory": "calendar"
     },
     {
       "type": "ical",
-      "color": "#bafdce",
+      "color": "#e6fbda",
       "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics"
-    },
-    {
-      "type": "ical",
-      "color": "#c3e1f3",
-      "url": "https://calendar.google.com/calendar/ical/jyue16587%40gmail.com/private-ec0e6c926d464a0e16c0a8802c81593f/basic.ics"
     }
   ],
   "defaultCalendar": 0,
