@@ -9,6 +9,11 @@
       "type": "ical",
       "color": "#bafdce",
       "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics"
+    },
+    {
+      "type": "ical",
+      "color": "#cbe0fb",
+      "url": "https://calendar.google.com/calendar/embed?src=jyue16587%40gmail.com&ctz=America%2FNew_York"
     }
   ],
   "defaultCalendar": 0,
