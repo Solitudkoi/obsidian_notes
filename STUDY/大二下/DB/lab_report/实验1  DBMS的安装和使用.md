@@ -1,13 +1,14 @@
-### 实验目的：
+>蒋玥 3240103533
+## 实验目的：
 ---
 1. 通过安装某个数据库管理系统，初步了解DBMS的运行环境。
 2. 了解DBMS交互界面、图形界面和系统管理工具的使用。
 3. 搭建实验平台。
-### 实验平台：
+## 实验平台：
 --- 
 1.操作系统： Windows
 2.数据库管理系统：MySQL
-### 实验内容和要求：
+## 实验内容和要求：
 ---
    1.根据某个DBMS的安装说明等文档，安装DBMS。
 	   1.1在MySQL官网https://dev.mysql.com/downloads/mysql/5.7.html#downloads  上下载最新版本：MYSQL Community Server 9.6.0 
@@ -21,20 +22,20 @@
 	   
    2.了解基本的DBMS管理功能和操作，创建数据库表。
 	 基本交互命令：
-	 -  数据库查询：SHOW DATABASES;
+	 2.1 数据库查询：SHOW DATABASES;
 	   ![[Pasted image 20260323132231.png]]   
-	 - 创建数据库:CREATE DATABASE database_name;
+	 2.2创建数据库:CREATE DATABASE database_name;
 	   ![[Pasted image 20260323133717.png]]
-	 - 进入数据库：USE database_name;
+	 2.3进入数据库：USE database_name;
 	   ![[Pasted image 20260323133826.png]]
-	 - 在数据库中创建表格的schema:CREATE TABLE table_schema();
+	 2.4在数据库中创建表格的schema:CREATE TABLE table_schema();
 	   ![[Pasted image 20260323134320.png]]
 		 table_schema是table的表格名，括号内为表结构定义，每一行通常表示一个字段。每个字段一般包含字段名、数据类型以及[约束]（没有额外约束时可以默认为空）三个部分。
-	 - 显示该database中的表格：SHOW TABLES;
+	 2.5显示该database中的表格：SHOW TABLES;
 	   ![[Pasted image 20260323134942.png]]
-	 - 显示该表格的schema:DESCRIBE table_name;
+	2.6显示该表格的schema:DESCRIBE table_name;
 	   ![[Pasted image 20260323135107.png]]
-	 - 插入表格数据：INSERT INTO table VALUES(...);
+	 2.7插入表格数据：INSERT INTO table VALUES(...);
 	   ![[Pasted image 20260323135813.png]]
 		 一次可以插入多条数据，插入的每一条数据以()为单位，必须按照之前设定的结构表一一对应地插入。可以只插入部分字段，前提是其他字段允许 NULL 或有默认值（eg:INSERT INTO student (name, age) VALUES ('张三', 20);)。
 		 ![[Pasted image 20260323140428.png]]
@@ -50,15 +51,15 @@ FROM 表名
 [ORDER BY 排序字段 ASC|DESC]
 [LIMIT 条数];
   ```
-   - 查询整个表格：SELECT * table VALUES(...);
+   - 3.1 查询整个表格：SELECT * table VALUES(...);
     ![[Pasted image 20260323141201.png]]
-   - 查询指定字段：SELECT ... FROM student;
+   - 3.2 查询指定字段：SELECT ... FROM student;
     ![[Pasted image 20260323141227.png]]
-   - 条件查询：SELECT * FROM table_name WHERE ...;
+   - 3.3 条件查询：SELECT * FROM table_name WHERE ...;
     ![[Pasted image 20260323141249.png]]
-   - 排序查询：SELECT * FROM table_name ORDER BY ... DESC;
+   - 3.4 排序查询：SELECT * FROM table_name ORDER BY ... DESC;
     ![[Pasted image 20260323141419.png]]
-   - 组合查询：SELECT * FROM student WHERE age > 20 ORDER BY age DESC;
+   - 3.4 组合查询：SELECT * FROM student WHERE age > 20 ORDER BY age DESC;
     ![[Pasted image 20260323141457.png]]
 
 ### 实验心得
