@@ -27,5 +27,7 @@
 	![[Pasted image 20260323133717.png]]
 	 - 进入数据库：USE database_name;
 	 ![[Pasted image 20260323133826.png]]
-	 - 在数据库中创建表格的schema
+	 - 在数据库中创建表格的schema:CREATE TABLE table_schema();
+	 ![[Pasted image 20260323134320.png]]
+		 table_schema是table的表格名，括号内
    3.查询表中的内容。
