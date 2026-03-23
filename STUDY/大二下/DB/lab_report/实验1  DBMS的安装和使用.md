@@ -35,5 +35,6 @@
 	 - 显示该表格的schema:DESCRIBE table_name;
 	 ![[Pasted image 20260323135107.png]]
 	 - 插入表格数据：INSERT INTO table VALUES(...);
-	 
+	 ![[Pasted image 20260323135813.png]]
+		 一次可以插入多条数据，插入的每一条数据以()为单位，必须按照之前设定的结构表一一对应地插入，可以只插入部分字段
    3.查询表中的内容。
