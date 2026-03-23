@@ -21,8 +21,11 @@
 	   
    2.了解基本的DBMS管理功能和操作，创建数据库表。
 	 基本交互命令：
-	 - 数据库查询：SHOW DATABASE;
+	 - 数据库查询：SHOW DATABASES;
 	   ![[Pasted image 20260323132231.png]]   
 	 - 创建数据库:CREATE DATABASE database_name;
-	![[Pasted image 20260323133433.png]]
+	![[Pasted image 20260323133717.png]]
+	 - 进入数据库：USE database_name;
+	 ![[Pasted image 20260323133826.png]]
+	 - 在数据库中创建表格的schema
    3.查询表中的内容。
