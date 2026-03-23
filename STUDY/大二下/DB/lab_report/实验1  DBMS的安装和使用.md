@@ -52,9 +52,12 @@ FROM 表名
   ```
    - 查询整个表格：SELECT * table VALUES(...);
    ![[Pasted image 20260323141201.png]]
-   - 查询指定字段：SELECT name, age FROM student;
-   - 条件查询：SELECT * FROM student WHERE age > 20;
-   - 排序查询：
-   - 聚合查询（统计）：
-   - 分组查询：
-   - 组合查询：
+   - 查询指定字段：SELECT ... FROM student;
+   ![[Pasted image 20260323141227.png]]
+   - 条件查询：SELECT * FROM table_name WHERE ...;
+   ![[Pasted image 20260323141249.png]]
+   - 排序查询：SELECT * FROM table_name ORDER BY ... DESC;
+![[Pasted image 20260323141419.png]]
+   - 组合查询：SELECT * FROM student WHERE age > 20 ORDER BY age DESC;
+![[Pasted image 20260323141457.png]]
+
