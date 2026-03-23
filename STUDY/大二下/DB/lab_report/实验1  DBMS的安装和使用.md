@@ -20,7 +20,9 @@
 	  ![[Pasted image 20260323130122.png]]
 	   
    2.了解基本的DBMS管理功能和操作，创建数据库表。
-	   2.1数据库查询操作
-	   ![[Pasted image 20260323132231.png]]
-	   2.2
+	 基本交互命令：
+	 - 数据库查询：SHOW DATABASE;
+	   ![[Pasted image 20260323132231.png]]   
+	 - 创建数据库:CREATE DATABASE database_name;
+	![[Pasted image 20260323133433.png]]
    3.查询表中的内容。
