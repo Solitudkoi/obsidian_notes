@@ -21,7 +21,7 @@
 	   
    2.了解基本的DBMS管理功能和操作，创建数据库表。
 	 基本交互命令：
-	 - 数据库查询：SHOW DATABASES;
+	 -  数据库查询：SHOW DATABASES;
 	   ![[Pasted image 20260323132231.png]]   
 	 - 创建数据库:CREATE DATABASE database_name;
 	![[Pasted image 20260323133717.png]]
@@ -40,5 +40,21 @@
 		 ![[Pasted image 20260323140428.png]]
 		 
    3.查询表中的内容。
+   #### 通用结构：
+  ```
+SELECT 列名
+FROM 表名
+[WHERE 条件]
+[GROUP BY 分组字段]
+[HAVING 分组条件]
+[ORDER BY 排序字段 ASC|DESC]
+[LIMIT 条数];
+  ```
    - 查询整个表格：SELECT * table VALUES(...);
-   - 查询指定字段:
+   ![[Pasted image 20260323141201.png]]
+   - 查询指定字段：SELECT name, age FROM student;
+   - 条件查询：SELECT * FROM student WHERE age > 20;
+   - 排序查询：
+   - 聚合查询（统计）：
+   - 分组查询：
+   - 组合查询：
