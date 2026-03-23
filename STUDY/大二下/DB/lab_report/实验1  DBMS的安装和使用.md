@@ -13,31 +13,51 @@
    1.根据某个DBMS的安装说明等文档，安装DBMS。
 	1.1在MySQL官网https://dev.mysql.com/downloads/mysql/5.7.html#downloads  上下载最新版本：MYSQL Community Server 9.6.0 
 		   ![[屏幕截图 2026-03-11 112547.png]]
+	-
 	1.2登录账号，并设置合适的配置后完成下载并应用
 		   ![[屏幕截图 2026-03-11 114638.png]]
+		-   
 	1.3设置环境变量，便于调用mysql命令
-		   在系统属性的环境变量中，将MYSQL的可执行命令路径（.../mysql/bin)添加至系统变量的 #PATH 中
+		   在系统属性的环境变量中，将MYSQL的可执行命令路径（.../mysql/bin)添加至系统变量的 #PATH 中。
+		-   
 	1.4使用命令开启mysql服务并登录账号
-		  ![[Pasted image 20260323130122.png]]
+		![[Pasted image 20260323130122.png]]
 	   
    2.了解基本的DBMS管理功能和操作，创建数据库表。
 	 基本交互命令：
 	 2.1 数据库查询：SHOW DATABASES;
-		   ![[Pasted image 20260323132231.png]]   
+	    
+		   
+		   ![[Pasted image 20260323132231.png]]  
+		    
 	 2.2创建数据库:CREATE DATABASE database_name;
+	 
 		   ![[Pasted image 20260323133717.png]]
+		   
 	 2.3进入数据库：USE database_name;
+	 
 		   ![[Pasted image 20260323133826.png]]
+		   
 	 2.4在数据库中创建表格的schema:CREATE TABLE table_schema();
+	 
 		   ![[Pasted image 20260323134320.png]]
+		   
 		 table_schema是table的表格名，括号内为表结构定义，每一行通常表示一个字段。每个字段一般包含字段名、数据类型以及[约束]（没有额外约束时可以默认为空）三个部分。
+		 
 	 2.5显示该database中的表格：SHOW TABLES;
+	 
 		   ![[Pasted image 20260323134942.png]]
+		   
 	2.6显示该表格的schema:DESCRIBE table_name;
+	
 		   ![[Pasted image 20260323135107.png]]
+		   
 	 2.7插入表格数据：INSERT INTO table VALUES(...);
+	 
 		   ![[Pasted image 20260323135813.png]]
+		   
 		 一次可以插入多条数据，插入的每一条数据以()为单位，必须按照之前设定的结构表一一对应地插入。可以只插入部分字段，前提是其他字段允许 NULL 或有默认值（eg:INSERT INTO student (name, age) VALUES ('张三', 20);)。
+		 
 		 ![[Pasted image 20260323140428.png]]
 		 
    3.查询表中的内容。
