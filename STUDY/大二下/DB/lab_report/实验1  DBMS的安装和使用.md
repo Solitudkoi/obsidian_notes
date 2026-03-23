@@ -36,5 +36,9 @@
 	 ![[Pasted image 20260323135107.png]]
 	 - 插入表格数据：INSERT INTO table VALUES(...);
 	 ![[Pasted image 20260323135813.png]]
-		 一次可以插入多条数据，插入的每一条数据以()为单位，必须按照之前设定的结构表一一对应地插入，可以只插入部分字段
+		 一次可以插入多条数据，插入的每一条数据以()为单位，必须按照之前设定的结构表一一对应地插入。可以只插入部分字段，前提是其他字段允许 NULL 或有默认值（eg:INSERT INTO student (name, age) VALUES ('张三', 20);)。
+		 ![[Pasted image 20260323140428.png]]
+		 
    3.查询表中的内容。
+   - 查询整个表格：SELECT * table VALUES(...);
+   - 查询指定字段:
