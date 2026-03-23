@@ -10,7 +10,7 @@
 ### 实验内容和要求：
 ---
    1.根据某个DBMS的安装说明等文档，安装DBMS。
-	   1.1在MySQL官https://dev.mysql.com/downloads/mysql/5.7.html#downloads下载MYSQL Community Server 9.6.0 版本
+	   1.1在MySQL官网https://dev.mysql.com/downloads/mysql/5.7.html#downloads上下载最新版本：MYSQL Community Server 9.6.0 
 	   ![[屏幕截图 2026-03-11 112547.png]]
 	   1.2登录账号，并设置合适的配置后完成下载并应用
 	   ![[屏幕截图 2026-03-11 114638.png]]
@@ -20,6 +20,4 @@
 	  ![[Pasted image 20260323130122.png]]
 	   
    2.了解基本的DBMS管理功能和操作，创建数据库表。
-	   2.1设置环境变量
-4. 查询表中的内容。
-5. 完成实验报告，要求用截图+文字描述实验完成过程。
+   3.查询表中的内容。
