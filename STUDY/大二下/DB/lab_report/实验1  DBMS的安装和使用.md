@@ -29,5 +29,9 @@
 	 ![[Pasted image 20260323133826.png]]
 	 - 在数据库中创建表格的schema:CREATE TABLE table_schema();
 	 ![[Pasted image 20260323134320.png]]
-		 table_schema是table的表格名，括号内
+		 table_schema是table的表格名，括号内为表结构定义，每一行通常表示一个字段。每个字段一般包含字段名、数据类型以及[约束]（没有额外约束时可以默认为空）三个部分。
+	 - 显示该database中的表格：SHOW TABLES;
+	 ![[Pasted image 20260323134942.png]]
+	 - 显示该表格的schema:DESCRIBE table_name;
+	 
    3.查询表中的内容。
