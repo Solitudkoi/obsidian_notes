@@ -33,5 +33,7 @@
 	 - 显示该database中的表格：SHOW TABLES;
 	 ![[Pasted image 20260323134942.png]]
 	 - 显示该表格的schema:DESCRIBE table_name;
+	 ![[Pasted image 20260323135107.png]]
+	 - 插入表格数据：INSERT INTO table VALUES(...);
 	 
    3.查询表中的内容。
