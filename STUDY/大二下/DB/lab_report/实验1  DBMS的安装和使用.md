@@ -24,18 +24,18 @@
 	 -  数据库查询：SHOW DATABASES;
 	   ![[Pasted image 20260323132231.png]]   
 	 - 创建数据库:CREATE DATABASE database_name;
-	![[Pasted image 20260323133717.png]]
+	   ![[Pasted image 20260323133717.png]]
 	 - 进入数据库：USE database_name;
-	 ![[Pasted image 20260323133826.png]]
+	   ![[Pasted image 20260323133826.png]]
 	 - 在数据库中创建表格的schema:CREATE TABLE table_schema();
-	 ![[Pasted image 20260323134320.png]]
+	   ![[Pasted image 20260323134320.png]]
 		 table_schema是table的表格名，括号内为表结构定义，每一行通常表示一个字段。每个字段一般包含字段名、数据类型以及[约束]（没有额外约束时可以默认为空）三个部分。
 	 - 显示该database中的表格：SHOW TABLES;
-	 ![[Pasted image 20260323134942.png]]
+	   ![[Pasted image 20260323134942.png]]
 	 - 显示该表格的schema:DESCRIBE table_name;
-	 ![[Pasted image 20260323135107.png]]
+	   ![[Pasted image 20260323135107.png]]
 	 - 插入表格数据：INSERT INTO table VALUES(...);
-	 ![[Pasted image 20260323135813.png]]
+	   ![[Pasted image 20260323135813.png]]
 		 一次可以插入多条数据，插入的每一条数据以()为单位，必须按照之前设定的结构表一一对应地插入。可以只插入部分字段，前提是其他字段允许 NULL 或有默认值（eg:INSERT INTO student (name, age) VALUES ('张三', 20);)。
 		 ![[Pasted image 20260323140428.png]]
 		 
@@ -51,13 +51,20 @@ FROM 表名
 [LIMIT 条数];
   ```
    - 查询整个表格：SELECT * table VALUES(...);
-   ![[Pasted image 20260323141201.png]]
+    ![[Pasted image 20260323141201.png]]
    - 查询指定字段：SELECT ... FROM student;
-   ![[Pasted image 20260323141227.png]]
+    ![[Pasted image 20260323141227.png]]
    - 条件查询：SELECT * FROM table_name WHERE ...;
-   ![[Pasted image 20260323141249.png]]
+    ![[Pasted image 20260323141249.png]]
    - 排序查询：SELECT * FROM table_name ORDER BY ... DESC;
-![[Pasted image 20260323141419.png]]
+    ![[Pasted image 20260323141419.png]]
    - 组合查询：SELECT * FROM student WHERE age > 20 ORDER BY age DESC;
-![[Pasted image 20260323141457.png]]
+    ![[Pasted image 20260323141457.png]]
 
+### 实验心得
+---
+通过本次数据库实验，我掌握了MySQL中数据库和数据表的基本操作方法，包括创建数据库、创建数据表、插入数据以及使用SELECT语句进行数据查询等内容。
+
+实际操作中，也遇到了一些问题，比如在插入“name”数据时没有给字符串加引号，导致出现“Unknown column”的报错。通过查阅资料和分析错误信息，我了解到字符串类型必须使用单引号括起来。
+
+通过本次实验，我不仅掌握了基本的数据库操作，还提高了分析问题和解决问题的能力，对数据库管理系统的基本功能有了更加直观和深入的认识。
