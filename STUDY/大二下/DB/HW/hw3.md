@@ -9,7 +9,6 @@
 		account in the bank and who lives in “Harrison”.
 
 
-![[Pasted image 20260324132852.png]]
 
 3.9 Consider the relational database of Figure 3.19, where the primary keys are underlined. Give an expression in SQL for each of the following queries.
 	a. Find the ID, name, and city of residence of each employee who works for “First Bank Corporation”.
@@ -21,7 +20,7 @@
 	f. Find the name of the company that has the most employees (or companies, in the case where there is a tie for the most).
 	g. Find the name of each company whose employees earn a higher salary,on average, than the average salary at “First Bank Corporation”.
 
-
+![[Pasted image 20260324132852.png]]
 
 3.10 Consider the relational database of Figure 3.19. Give an expression in SQL foreach of the following:
 	a. Modify the database so that the employee whose ID is '12345' now lives in “Newtown”.
@@ -32,3 +31,4 @@
 	a. Find each customer who has an account at every branch located in “Brooklyn”.
 	b. Find the total sum of all loan amounts in the bank.
 	c. Find the names of all branches that have assets greater than those of at least one branch located in “Brooklyn”.
+![[Pasted image 20260324132914.png]]
