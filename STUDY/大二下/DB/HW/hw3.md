@@ -24,7 +24,7 @@
 
 3.10 Consider the relational database of Figure 3.19. Give an expression in SQL foreach of the following:
 	a. Modify the database so that the employee whose ID is '12345' now lives in “Newtown”.
-	b. Give each manager of “First Bank Corporation” a 10 percent raise unlessthe salary becomes greater than $100000; in such cases, give only a 3 percent raise.
+	b. Give each manager of “First Bank Corporation” a 10 percent raise unless the salary becomes greater than $100000; in such cases, give only a 3 percent raise.
 
 
 3.15 Consider the bank database of Figure 3.18, where the primary keys are underlined. Construct the following SQL queries for this relational database.
