@@ -147,3 +147,225 @@ module ExceptionUnit(
 endmodule
 
 ```
+
+
+
+
+```
+`timescale 1ns / 1ps
+
+module ExceptionUnit(
+    input              clk,
+    input              rst,
+
+    // CSR instruction info from MEM stage
+    input              csr_rw_in,
+    input      [1:0]   csr_wsc_mode_in,   // funct3[1:0]: 01=rw, 10=rs, 11=rc
+    input              csr_w_imm_mux,     // 0: rs1 data, 1: zimm
+    input      [11:0]  csr_rw_addr_in,
+    input      [31:0]  csr_w_data_reg,
+    input      [4:0]   csr_w_data_imm,
+    output reg [31:0]  csr_r_data_out,
+
+    // exception / interrupt from WB stage
+    input              interrupt,
+    input              illegal_inst,
+    input              ecall_m,
+    input              l_access_fault,
+    input              s_access_fault,
+
+    // mret from MEM stage
+    input              mret,
+
+    // PC info
+    input      [31:0]  epc_cur,   // current instruction PC (for exception)
+    input      [31:0]  epc_next,  // next instruction PC (for interrupt)
+
+    // redirect control
+    output reg [31:0]  PC_redirect,
+    output reg         redirect_mux,
+
+    // pipeline flush
+    output wire        reg_FD_flush,
+    output wire        reg_DE_flush,
+    output wire        reg_EM_flush,
+    output wire        reg_MW_flush,
+
+    // cancel register writeback for faulting instruction
+    output wire        RegWrite_cancel
+);
+
+    // ----------------------------
+    // CSR registers (only M-mode)
+    // ----------------------------
+    reg [31:0] mstatus;
+    reg [31:0] mtvec;
+    reg [31:0] mepc;
+    reg [31:0] mcause;
+
+    // CSR addresses
+    localparam CSR_MSTATUS = 12'h300;
+    localparam CSR_MTVEC   = 12'h305;
+    localparam CSR_MEPC    = 12'h341;
+    localparam CSR_MCAUSE  = 12'h342;
+
+    // mstatus bits used in this lab
+    // MIE  = bit[3]
+    // MPIE = bit[7]
+
+
+    wire sync_exception;
+    assign sync_exception = illegal_inst | ecall_m | l_access_fault | s_access_fault;
+
+    // CSR read mux
+    always @(*) begin
+        case (csr_rw_addr_in)
+            CSR_MSTATUS: csr_r_data_out = mstatus;
+            CSR_MTVEC  : csr_r_data_out = mtvec;
+            CSR_MEPC   : csr_r_data_out = mepc;
+            CSR_MCAUSE : csr_r_data_out = mcause;
+            default    : csr_r_data_out = 32'h0;
+        endcase
+    end
+
+
+
+    wire trap_req_wb;
+    assign trap_req_wb = interrupt | illegal_inst | ecall_m | l_access_fault | s_access_fault;
+
+    always @(*) begin
+        redirect_mux = 1'b0;
+        PC_redirect  = 32'h00000000;
+
+        if (trap_req_wb) begin
+            redirect_mux = 1'b1;
+            PC_redirect  = {mtvec[31:2], 2'b00};   // direct mode
+        end
+        else if (mret) begin
+            redirect_mux = 1'b1;
+            PC_redirect  = mepc;
+        end
+    end
+
+    // flush strategy:
+    // trap / mret happens after younger insts have entered pipeline, so flush all front stages.
+    assign reg_FD_flush = redirect_mux;
+    assign reg_DE_flush = redirect_mux;
+    assign reg_EM_flush = trap_req_wb;   // trap kills younger instructions
+    assign reg_MW_flush = 1'b0;       // current WB is trap source itself, usually not needed to flush MW
+
+    // cancel WB only for synchronous exception, not interrupt, not mret
+    assign RegWrite_cancel = sync_exception;
+
+    // helpers
+    reg [31:0] csr_old;
+    reg [31:0] csr_wdata;
+    reg [31:0] csr_src;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            mstatus <= 32'h0000_0008; // MIE=1 can also be 0 depending on teacher design; 8 is common lab default
+            mtvec   <= 32'h0000_0000;
+            mepc    <= 32'h0000_0000;
+            mcause  <= 32'h0000_0000;
+        end
+        else begin
+            // ----------------------------
+            // Priority 1: trap entry
+            // ----------------------------
+            if (trap_req_wb) begin
+                // save exception pc:
+                // interrupt -> next PC
+                // synchronous exception -> current PC
+                if (interrupt)
+                    mepc <= epc_next;
+                else
+                    mepc <= epc_cur;
+
+                // mcause
+                if (interrupt)
+                    mcause <= 32'h8000_000b;  // machine external interrupt (common lab choice)
+                else if (illegal_inst)
+                    mcause <= 32'd2;
+                else if (ecall_m)
+                    mcause <= 32'd11;
+                else if (l_access_fault)
+                    mcause <= 32'd5;
+                else if (s_access_fault)
+                    mcause <= 32'd7;
+
+                // mstatus: MPIE <= MIE, MIE <= 0
+                mstatus[7] <= mstatus[3];
+                mstatus[3] <= 1'b0;
+            end
+
+            // ----------------------------
+            // Priority 2: mret
+            // ----------------------------
+            else if (mret) begin
+                // mstatus: MIE <= MPIE, MPIE <= 1
+                mstatus[3] <= mstatus[7];
+                mstatus[7] <= 1'b1;
+            end
+
+            // ----------------------------
+            // Priority 3: normal CSR write in MEM
+            // ----------------------------
+            else if (csr_rw_in) begin
+                csr_src = csr_w_imm_mux ? {27'b0, csr_w_data_imm} : csr_w_data_reg;
+
+                case (csr_rw_addr_in)
+                    CSR_MSTATUS: begin
+                        csr_old = mstatus;
+                        case (csr_wsc_mode_in)
+                            2'b01: csr_wdata = csr_src;           // csrrw / csrrwi
+                            2'b10: csr_wdata = csr_old | csr_src; // csrrs / csrrsi
+                            2'b11: csr_wdata = csr_old & ~csr_src;// csrrc / csrrci
+                            default: csr_wdata = csr_old;
+                        endcase
+                        mstatus <= csr_wdata;
+                    end
+
+                    CSR_MTVEC: begin
+                        csr_old = mtvec;
+                        case (csr_wsc_mode_in)
+                            2'b01: csr_wdata = csr_src;
+                            2'b10: csr_wdata = csr_old | csr_src;
+                            2'b11: csr_wdata = csr_old & ~csr_src;
+                            default: csr_wdata = csr_old;
+                        endcase
+                        mtvec <= csr_wdata;
+                    end
+
+                    CSR_MEPC: begin
+                        csr_old = mepc;
+                        case (csr_wsc_mode_in)
+                            2'b01: csr_wdata = csr_src;
+                            2'b10: csr_wdata = csr_old | csr_src;
+                            2'b11: csr_wdata = csr_old & ~csr_src;
+                            default: csr_wdata = csr_old;
+                        endcase
+                        mepc <= csr_wdata;
+                    end
+
+                    CSR_MCAUSE: begin
+                        csr_old = mcause;
+                        case (csr_wsc_mode_in)
+                            2'b01: csr_wdata = csr_src;
+                            2'b10: csr_wdata = csr_old | csr_src;
+                            2'b11: csr_wdata = csr_old & ~csr_src;
+                            default: csr_wdata = csr_old;
+                        endcase
+                        mcause <= csr_wdata;
+                    end
+
+                    default: begin
+                        // unsupported CSR: do nothing
+                    end
+                endcase
+            end
+        end
+    end
+
+endmodule
+```
