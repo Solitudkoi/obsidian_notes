@@ -27,7 +27,7 @@ HAVING count(account_number)>3;
 SELECT branch_name
 FROM account
 GROUP BY branch_name
-ORDER BY count(account_number)
+ORDER BY count(account_number) DESC
 limit 1;
 
 5.找出“平均余额最高”的支行名称
@@ -36,8 +36,12 @@ SELECT branch_name
 FROM account
 GROUP BY branch_name
 HAVING avg(balance)=(
-				SELECT
-				FROM)
+				SELECT max(avg_balance)
+				FROM (
+					SELECT avg(balance) as avg_balance
+					FROM account
+					GROUP BY branch_name)
+					as temp);
 
 
 
