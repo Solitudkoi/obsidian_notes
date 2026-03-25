@@ -35,7 +35,9 @@ limit 1;
 SELECT branch_name
 FROM account
 GROUP BY branch_name
-HAVING avg()
+HAVING avg(balance)=(
+				SELECT
+				FROM)
 
 
 
