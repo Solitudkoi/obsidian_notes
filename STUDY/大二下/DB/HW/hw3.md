@@ -100,3 +100,20 @@ where assets > (
 > 大于 Brooklyn 中至少一个支行的资产  
 > 等价于  
 > 大于 Brooklyn 支行资产中的最小值
+
+
+
+
+
+```
+SELECT customer_name 
+FROM costomer c ,branch b ,depositor d,account a 
+WHERE not exist (
+	SELECT branch_name
+	FROM branch
+	WHERE branch_city='Brooklyn')
+	EXCEPT
+	( SELECT branch.name
+	  WHERE c.ID=d.ID
+			and  d.account_name=a.account_name)
+```
