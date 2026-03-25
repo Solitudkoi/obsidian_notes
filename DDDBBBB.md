@@ -22,6 +22,22 @@ FROM account
 GROUP BY branch_name
 HAVING count(account_number)>3;
 
+4.找出账户数量最多的支行名称（只要一个）
+
+SELECT branch_name
+FROM account
+GROUP BY branch_name
+ORDER BY count(account_number)
+limit 1;
+
+5.找出“平均余额最高”的支行名称
+
+SELECT branch_name
+FROM account
+WHERE 
+
+
+
 SELECT
 FROM
 WHERE
