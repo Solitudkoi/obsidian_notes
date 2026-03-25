@@ -115,5 +115,7 @@ WHERE not exist (
 	EXCEPT
 	( SELECT branch.name
 	  WHERE c.ID=d.ID
-			and  d.account_name=a.account_name)
+		and  d.account_name=a.account_name
+		and a.branch_name=b.branch_name
+		and branch_city='Brooklyn');
 ```
