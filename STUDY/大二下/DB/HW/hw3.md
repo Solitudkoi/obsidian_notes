@@ -32,3 +32,71 @@
 	b. Find the total sum of all loan amounts in the bank.
 	c. Find the names of all branches that have assets greater than those of at least one branch located in “Brooklyn”.
 ![[Pasted image 20260324132914.png]]
+## 3.15 a
+
+**找出在位于 “Brooklyn” 的每一个支行都有账户的客户**
+
+又是典型“除法”问题。
+
+select c.ID, c.customer_name  
+from customer c  
+where not exists (  
+    select b.branch_name  
+    from branch b  
+    where b.branch_city = 'Brooklyn'  
+      and not exists (  
+          select *  
+          from depositor d  
+          join account a on d.account_number = a.account_number  
+          where d.ID = c.ID  
+            and a.branch_name = b.branch_name  
+      )  
+);
+
+意思是：
+
+> 不存在某个 Brooklyn 的支行，使得该客户在这个支行没有账户。
+
+如果只要客户 ID，也可以写成只选 `c.ID`。
+
+---
+
+## 3.15 b
+
+**求银行所有贷款金额总和**
+
+select sum(amount) as total_loan_amount  
+from loan;
+
+---
+
+## 3.15 c
+
+**找出资产大于至少一个 Brooklyn 支行资产的所有支行名**
+
+“greater than those of at least one”  
+就是 **大于 Brooklyn 中某一个支行的资产**，用 `> ANY`。
+
+select branch_name  
+from branch  
+where assets > any (  
+    select assets  
+    from branch  
+    where branch_city = 'Brooklyn'  
+);
+
+有些数据库不支持 `ANY`，可以改写成：
+
+select branch_name  
+from branch  
+where assets > (  
+    select min(assets)  
+    from branch  
+    where branch_city = 'Brooklyn'  
+);
+
+因为：
+
+> 大于 Brooklyn 中至少一个支行的资产  
+> 等价于  
+> 大于 Brooklyn 支行资产中的最小值
