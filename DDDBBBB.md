@@ -34,7 +34,9 @@ limit 1;
 
 SELECT branch_name
 FROM account
-WHERE 
+GROUP BY branch_name
+HAVING avg()
+
 
 
 
