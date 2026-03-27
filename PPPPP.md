@@ -1,3 +1,5 @@
+- 1.信息处理
+
 ```
       ANN（传统）             NSLLM（本文）                SNN（传统神经拟态）
 
@@ -23,6 +25,8 @@
                     输出（累加）
 ```
 
+2.对比
+
 | 维度    | ANN          | INT4/INT8          | SNN            | NSLLM         |
 | ----- | ------------ | ------------------ | -------------- | ------------- |
 | 信息表示  | 连续值（float）   | 低比特整数              | spike（0/1）     | 整数 + spike    |
@@ -37,7 +41,7 @@
 | 延迟    | 低            | 低                  | 不稳定            | 较高            |
 | 训练难度  | 中            | 低                  | 高              | 中             |
 
-- 硬件执行：
+- 3.硬件执行：
 
 | 方法    | 硬件执行逻辑          |
 | ----- | --------------- |
@@ -45,6 +49,7 @@
 | INT4  | 低bit矩阵乘         |
 | SNN   | 事件路由 + neuron更新 |
 | NSLLM | 时间步循环 + 加减运算    |
+- 4.综合性能
 Compute Cost ≈ bit-width × active operations × time-steps
 
 > 我认为 NSLLM 是在 ANN 和 SNN 之间寻找一种折中方案来降低大模型的计算和内存成本。
@@ -59,4 +64,4 @@ Compute Cost ≈ bit-width × active operations × time-steps
 
 **NSLLM = bit-serial computing + sparse computing**
 
->而且NSLLM实际上是融合两种现有技术bit-serial computing和sparse computing
+>而且NSLLM实际上是融合两种现有技术bit-serial computing和sparse computing的组合，把脉冲神经、稀疏算法以及an'wei'ji'suan
