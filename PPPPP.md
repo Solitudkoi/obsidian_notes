@@ -73,3 +73,5 @@ Compute Cost ≈ bit-width × active operations × time-steps
 //
 *“As depicted in Fig. 1a, we meticulously monitored the quantization errors of spiking neurons and quantized the full-precision activation values and weights within predefined integer intervals .”*
 *“Based on this, we proposed a layer-wise sensitivity-based algorithm to determine the optimal quantization mode for each layer in the neural network.”*
+
+![[Pasted image 20260327215110.png]]
