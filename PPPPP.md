@@ -52,6 +52,8 @@
 - 4.综合性能
 Compute Cost ≈ bit-width × active operations × time-steps
 
+*“demonstrates a 19.8 improvement in power efficiency, a 21.3 reduction in memory usage and a 2.2 increase in inference throughput.”*
+
 > 我认为 NSLLM 是在 ANN 和 SNN 之间寻找一种折中方案来降低大模型的计算和内存成本。
 > 
 > 首先在信息表示上，它没有直接使用传统 SNN 的二值脉冲，而是先将连续激活量化为整数，再通过时间展开转化为二值脉冲序列，让信息通过时间维度进行编码。
