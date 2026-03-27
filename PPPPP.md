@@ -75,3 +75,6 @@ Compute Cost ≈ bit-width × active operations × time-steps
 *“Based on this, we proposed a layer-wise sensitivity-based algorithm to determine the optimal quantization mode for each layer in the neural network.”*
 
 ![[Pasted image 20260327215110.png]]
+
+
+>我觉得综合来看，NSLLM是有在现有技术上进行创新融合的，但是
