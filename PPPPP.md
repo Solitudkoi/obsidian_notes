@@ -30,7 +30,7 @@
 | 维度    | ANN          | INT4/INT8          | SNN            | NSLLM         |
 | ----- | ------------ | ------------------ | -------------- | ------------- |
 | 信息表示  | 连续值（float）   | 低比特整数              | spike（0/1）     | 整数 + spike    |
-| 精度来源  | 数值幅度         | 数值幅度（低bit）         | 时间/频率          | 时间展开          |
+| 精度来源  | 数值幅度         | 数值幅度（低bit）         | 时间/频率          | 整数幅值 + 时间展开   |
 | 计算方式  | Dense MatMul | Dense MatMul（低bit） | 事件驱动           | Add/Sub + 时间步 |
 | 是否有乘法 | ✅            | ✅（低bit）            | ❌              | ❌             |
 | 稀疏性   | ❌            | ❌（弱）               | ✅              | ✅             |
@@ -51,7 +51,7 @@
 | NSLLM | 时间步循环 + 加减运算    |
 - 4.综合性能
 Compute Cost ≈ bit-width × active operations × time-steps
-
+NSLLM 是在用时间换计算复杂度
 *“demonstrates a 19.8 improvement in power efficiency, a 21.3 reduction in memory usage and a 2.2 increase in inference throughput.”*
 
 > 我认为 NSLLM 是在 ANN 和 SNN 之间寻找一种折中方案来降低大模型的计算和内存成本。
@@ -77,4 +77,4 @@ Compute Cost ≈ bit-width × active operations × time-steps
 ![[Pasted image 20260327215110.png]]
 
 
->我觉得综合来看，NSLLM是有在现有技术上进行创新融合的，但是其实本质上还是更像ANN，只是套用SNN的脉冲信号来优化计算，而且时间展开的这个方法如果输入的数据值都比较大导致脉冲信号比较多的情况下其实计算量也还是很大，并不一定能够在实际应用中提升性能。而且把单个数据分布到多个（实际）时间步上进行运算很容易产生在产生故障的时候难以解决/撤回。latency和energy之间的tradeoff也并没有解决。
+>我觉得综合来看，NSLLM是有在现有技术上进行创新融合的，但是其实本质上还是更像ANN，只是套用SNN的脉冲信号来优化计算，而且时间展开的这个方法如果输入的数据值都比较大导致脉冲信号比较多的情况下其实计算量也还是很大，并不一定能够在实际应用中提升性能。而且把单个数据分布到多个虚拟/计算时间步上进行运算，部分中间状态很容易在产生故障的时候难以解决修正/撤回。latency和energy之间的tradeoff也并没有解决。
