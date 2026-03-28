@@ -9,6 +9,11 @@
       "type": "ical",
       "color": "#e1f4d7",
       "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics"
+    },
+    {
+      "type": "ical",
+      "color": "#daf1f1",
+      "url": "https://raw.githubusercontent.com/Solitudkoi/calendar/refs/heads/main/celechron_schedule_1773716497418.ics"
     }
   ],
   "defaultCalendar": 0,
