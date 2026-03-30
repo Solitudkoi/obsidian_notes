@@ -68,11 +68,7 @@ FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
 
 SHOW TABLES;
 
-DESCRIBE account;
-
-DROP TABLE account;
-
-SHOW TABLES;
+DESCRIBE branch;
 
 ALTER TABLE branch
 ADD manager VARCHAR(50);
