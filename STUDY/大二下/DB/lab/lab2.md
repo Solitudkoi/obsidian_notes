@@ -27,28 +27,32 @@ CREATE TABLE branch(
      assets INT);
 
 CREATE TABLE depositor(
-    -> customer_name VARCHAR(50),
-    -> account_number INT);
+    customer_name VARCHAR(50),
+    account_number INT);
     
 CREATE TABLE account(
-    -> account_number INT,
-    -> branch_name VARCHAR(50),
-    -> balance INT);
+    account_number INT,
+    branch_name VARCHAR(50),
+    balance INT);
     
 CREATE TABLE customer(
-    -> customer_name VARCHAR(50),
-    -> cuetomer_street VARCHAR(50),
-    -> customer_city VARCHAR(50));
+    customer_name VARCHAR(50),
+    cuetomer_street VARCHAR(50),
+    customer_city VARCHAR(50));
     
 CREATE TABLE borrow(
-    -> customer_name VARCHAR(50),
-    -> loan_number INT);
+    customer_name VARCHAR(50),
+    loan_number INT);
     
  CREATE TABLE loan(
-    -> branch_name VARCHAR(50),
-    -> amount INT);
+    branch_name VARCHAR(50),
+    amount INT);
     
 DESCRIBE account;
 
-   
+SHOW TABLES;
+
+DROP TABLE account;
+
+SHOW TABLES;
 ```
