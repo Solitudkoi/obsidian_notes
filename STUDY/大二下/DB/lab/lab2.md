@@ -13,3 +13,42 @@
 6. 完成实验报告，要求用截图+文字描述实验完成过程。
 
 ![[Pasted image 20260330101958.png]]
+
+
+```
+
+ CREATE DATABASE lab2_banking;
+ 
+ USE lab2_banking;
+
+CREATE TABLE branch(
+     branch_name VARCHAR(50),
+     branch_city VARCHAR(50),
+     assets INT);
+
+CREATE TABLE depositor(
+    -> customer_name VARCHAR(50),
+    -> account_number INT);
+    
+CREATE TABLE account(
+    -> account_number INT,
+    -> branch_name VARCHAR(50),
+    -> balance INT);
+    
+CREATE TABLE customer(
+    -> customer_name VARCHAR(50),
+    -> cuetomer_street VARCHAR(50),
+    -> customer_city VARCHAR(50));
+    
+CREATE TABLE borrow(
+    -> customer_name VARCHAR(50),
+    -> loan_number INT);
+    
+ CREATE TABLE loan(
+    -> branch_name VARCHAR(50),
+    -> amount INT);
+    
+DESCRIBE account;
+
+   
+```
