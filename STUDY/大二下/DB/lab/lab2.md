@@ -22,31 +22,42 @@
  USE lab2_banking;
 
 CREATE TABLE branch(
-     branch_name VARCHAR(50),
-     branch_city VARCHAR(50),
-     assets INT);
+branch_name VARCHAR(50) PRIMARY KEY,
+branch_city VARCHAR(50),
+assets INT
+);
 
 CREATE TABLE depositor(
-    customer_name VARCHAR(50),
-    account_number INT);
+customer_name VARCHAR(50),
+account_number INT,
+PRIMARY KEY(customer_name, account_number),
+FOREIGN KEY(customer_name) REFERENCES customer(customer_name),
+FOREIGN KEY(account_number) REFERENCES account(account_number)
+);
     
 CREATE TABLE account(
-    account_number INT,
-    branch_name VARCHAR(50),
-    balance INT);
+account_number INT PRIMARY KEY,
+branch_name VARCHAR(50),
+balance INT,
+FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
+);
     
 CREATE TABLE customer(
-    customer_name VARCHAR(50),
-    cuetomer_street VARCHAR(50),
-    customer_city VARCHAR(50));
+customer_name VARCHAR(50) PRIMARY KEY,
+customer_street VARCHAR(50),
+customer_city VARCHAR(50)
+);
     
 CREATE TABLE borrow(
     customer_name VARCHAR(50),
     loan_number INT);
     
  CREATE TABLE loan(
-    branch_name VARCHAR(50),
-    amount INT);
+loan_number INT PRIMARY KEY,
+branch_name VARCHAR(50),
+amount INT,
+FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
+);
     
 DESCRIBE account;
 
