@@ -16,6 +16,7 @@
 
 
 ```
+mysql -u root -p
 
  CREATE DATABASE lab2_banking;
  
@@ -49,8 +50,12 @@ customer_city VARCHAR(50)
 );
     
 CREATE TABLE borrow(
-    customer_name VARCHAR(50),
-    loan_number INT);
+customer_name VARCHAR(50),
+loan_number INT,
+PRIMARY KEY(customer_name, loan_number),
+FOREIGN KEY(customer_name) REFERENCES customer(customer_name),
+FOREIGN KEY(loan_number) REFERENCES loan(loan_number)
+);
     
  CREATE TABLE loan(
 loan_number INT PRIMARY KEY,
@@ -58,12 +63,19 @@ branch_name VARCHAR(50),
 amount INT,
 FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
 );
-    
-DESCRIBE account;
 
 SHOW TABLES;
+
+DESCRIBE account;
 
 DROP TABLE account;
 
 SHOW TABLES;
+
+ALTER TABLE branch
+ADD manager VARCHAR(50);
+
+DESCRIBE branch;
+
+
 ```
