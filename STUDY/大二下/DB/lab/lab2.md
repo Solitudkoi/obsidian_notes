@@ -18,6 +18,8 @@
 ```
 mysql -u root -p
 
+SHOW DATABASES;
+
  CREATE DATABASE lab2_banking;
  
  USE lab2_banking;
