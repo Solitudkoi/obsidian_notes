@@ -254,3 +254,23 @@ DROP TABLE borrow;
 验证：
 
 SHOW TABLES;
+
+
+
+
+```
+function proxy_on {
+    $proxy_addr = "http://127.0.0.1:7890"
+    $env:http_proxy = $proxy_addr
+    $env:https_proxy = $proxy_addr
+    $env:all_proxy = "socks5://127.0.0.1:7890"
+    Write-Host "? Proxy has been ACTIVATED (Port: 7897)" -ForegroundColor Green
+}
+
+function proxy_off {
+    $env:http_proxy = ""
+    $env:https_proxy = ""
+    $env:all_proxy = ""
+    Write-Host "?? Proxy has been DISABLED" -ForegroundColor Yellow
+}
+```
