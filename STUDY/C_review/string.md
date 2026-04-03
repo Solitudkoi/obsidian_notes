@@ -34,11 +34,11 @@
 
 ### 其他常用（`<stdlib.h>` + `<ctype.h>`）
 
-|函数|作用|
-|---|---|
-|`atoi(s)`|字符串转 int|
-|`atof(s)`|字符串转 double|
-|`strtol(s, &end, base)`|字符串转 long（更安全）|
-|`sprintf(buf, fmt, ...)`|格式化输出到字符串|
-|`sscanf(s, fmt, ...)`|从字符串格式化读取|
-|`tolower(c)` / `toupper(c)`|大小写转换（单个字符）|）
+| 函数                          | 作用             |     |
+| --------------------------- | -------------- | --- |
+| `atoi(s)`                   | 字符串转 int       |     |
+| `atof(s)`                   | 字符串转 double    |     |
+| `strtol(s, &end, base)`     | 字符串转 long（更安全） |     |
+| `sprintf(buf, fmt, ...)`    | 格式化输出到字符串      |     |
+| `sscanf(s, fmt, ...)`       | 从字符串格式化读取      |     |
+| `tolower(c)` / `toupper(c)` | 大小写转换（单个字符）    | ）   |
