@@ -91,6 +91,13 @@ CREATE INDEX idx_customer_city ON customer(customer_city);
 SHOW INDEX FROM account;
 
 DROP INDEX idx_customer_city ON customer;
+
+
+CREATE INDEX idx_customer_city ON customer(customer_city);
+SHOW INDEX FROM customer\G
+DROP INDEX idx_customer_city ON customer;
+SHOW INDEX FROM customer;
+
 ```
 
 ## 四、插入数据
