@@ -7,3 +7,25 @@ Consider the employee database of Figure 4.12. Give an SQL DDL definition of thi
 4.18
 
 For the database of Figure 4.12, write a query to find the ID of each employee with no manager. Note that an employee may simply have no manager listed or may have a null manager. Write your query using an outer join and then write it again using no outer join at all.
+
+
+5.4
+
+Describe the circumstances in which you would choose to use embedded SQL rather than SQL alone or only a general-purpose programming language.
+
+5.13
+
+Suppose you were asked to define a class MetaDisplay in Java, containing a method static void printTable(String r); the method takes a relation name r as input, executes the query “select * from r”, and prints the result out in tabular format, with the attribute names displayed in the header of the table.
+a. What do you need to know about relation r to be able to print the result in the specified tabular format?
+b. What JDBC methods(s) can get you the required information?
+c. Write the method printTable(String r) using the JDBC API.
+
+
+5.14
+
+Repeat Exercise 5.13 using ODBC, defining void printTable(char *r) as a function instead of a method.
+
+
+5.19
+
+Suppose there are two relations r and s, such that the foreign key B ofr references the primary key A of s. Describe how the trigger mechanism can be used to implement the on delete cascade option when a tuple is deleted from s.
