@@ -36,7 +36,7 @@ create table manages(
     foreign key (manager_id) references employee(ID)
 );
 ```
-
+![[Pasted image 20260412203653.png]]
 4.18
 
 For the database of Figure 4.12, write a query to find the ID of each employee with no manager. Note that an employee may simply have no manager listed or may have a null manager. Write your query using an outer join and then write it again using no outer join at all.
