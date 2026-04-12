@@ -4,6 +4,39 @@ Consider the employee database of Figure 4.12. Give an SQL DDL definition of thi
 
 ![[Pasted image 20260412203653.png]]
 
+```
+create table employee(
+    ID integer,
+    person_name varchar(20),
+    street varchar(20),
+    city varchar(20),
+    primary key (ID)
+);
+
+create table works(
+    ID integer,
+    company_name varchar(20),
+    salary integer,
+    primary key (ID),
+    foreign key (ID) references employee(ID),
+    foreign key (company_name) references company(company_name)
+);
+
+create table company(
+    company_name varchar(20),
+    city varchar(20),
+    primary key (company_name)
+);
+
+create table manages(
+    ID integer,
+    manager_id integer,
+    primary key (ID),
+    foreign key (ID) references employee(ID),
+    foreign key (manager_id) references employee(ID)
+);
+```
+
 4.18
 
 For the database of Figure 4.12, write a query to find the ID of each employee with no manager. Note that an employee may simply have no manager listed or may have a null manager. Write your query using an outer join and then write it again using no outer join at all.
