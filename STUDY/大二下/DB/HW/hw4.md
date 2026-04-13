@@ -254,11 +254,34 @@ public class MetaDisplay {
 
 ---
 
-## 5.14 ODBC 版本
+好问题。题目说 "Repeat Exercise 5.13 using ODBC"，意思是**同样的三问都要做一遍**，只不过用 ODBC 回答。a 和 b 的**结论本质一样**（都是要知道列数和列名），但 b 要换成**ODBC 对应的函数**。
 
-**中文思路：** ODBC 对应的函数是 `SQLNumResultCols`（列数）、`SQLDescribeCol`（列名）、`SQLFetch`（取行）、`SQLGetData`（取字段值）。
+---
 
-**English Answer:**
+## 5.14 完整答案
+
+### (a) 需要知道什么？
+
+和 5.13 一样：关系 r 的**列数**和每个**列名**（用作表头）。
+
+### (b) ODBC 用哪些函数？
+
+- `SQLNumResultCols()` — 获取结果集的列数
+- `SQLDescribeCol()` — 获取每一列的列名（以及类型、长度等）
+- 配合 `SQLFetch()` 取行、`SQLGetData()` 取字段值
+
+**对比 5.13**：
+
+|功能|JDBC（5.13）|ODBC（5.14）|
+|---|---|---|
+|列数|`ResultSetMetaData.getColumnCount()`|`SQLNumResultCols()`|
+|列名|`ResultSetMetaData.getColumnName(i)`|`SQLDescribeCol()`|
+|取下一行|`ResultSet.next()`|`SQLFetch()`|
+|取列值|`ResultSet.getString(i)`|`SQLGetData()`|
+
+### (c) 代码
+
+就是我之前给你的那段 C 代码，这里再贴一遍方便你整合：
 
 ```c
 #include <stdio.h>
