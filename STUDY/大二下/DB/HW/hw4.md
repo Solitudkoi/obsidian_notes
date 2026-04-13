@@ -279,9 +279,7 @@ public class MetaDisplay {
 |取下一行|`ResultSet.next()`|`SQLFetch()`|
 |取列值|`ResultSet.getString(i)`|`SQLGetData()`|
 
-### (c) 代码
-
-就是我之前给你的那段 C 代码，这里再贴一遍方便你整合：
+### (c) 
 
 ```c
 #include <stdio.h>
@@ -343,6 +341,8 @@ void printTable(char *r) {
 ## 5.19 用触发器实现 ON DELETE CASCADE
 
 **中文思路：** 当 s 中某元组被删除时，需要自动删除 r 中所有 B 值等于被删除元组 A 值的行。用 AFTER DELETE 触发器监听 s 上的删除操作，然后在 r 上执行对应删除。注意 r 自身也可能被其他表参照，删除 r 的行可能递归触发更多触发器——这是期望的级联行为。
+
+Suppose there are two relations r and s, such that the foreign key B ofr references the primary key A of s. Describe how the trigger mechanism can be used to implement the on delete cascade option when a tuple is deleted from s.
 
 **English Answer:**
 
