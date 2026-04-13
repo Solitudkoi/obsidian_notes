@@ -94,3 +94,13 @@ begin atomic
 		values(nrow.id,employee.salary,nrow.salary)
 end
 ```
+
+- 把 `instructor` 表的查询权限给 Alice，并允许她转授。
+- **Alice 把这个权限授给 Bob。**（提示：现在是 Alice 在执行这条语句，不是 DBA）
+- **DBA 想一次性把 Alice 和 Bob 的权限都撤掉——写一条语句。**（提示：关键词是"一次性"和"连锁"）
+```
+GRANT SELECT ON instructor TO Alice with grant option;
+GRANT SELECT ON instructor TO Bob;
+
+
+```
