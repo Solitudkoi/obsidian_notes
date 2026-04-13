@@ -62,3 +62,31 @@ Repeat Exercise 5.13 using ODBC, defining void printTable(char *r) as a function
 5.19
 
 Suppose there are two relations r and s, such that the foreign key B ofr references the primary key A of s. Describe how the trigger mechanism can be used to implement the on delete cascade option when a tuple is deleted from s.
+
+
+
+
+
+
+```
+create trigger overdraft_trigger 
+after update of balance on account      ← 【什么时候】balance 被更新后
+referencing new row as nrow              ← 小工具：给"新值"起个名字叫 nrow
+for each row                             ← 小工具：每改一行跑一次
+when nrow.balance < 0                    ← 【什么条件】新余额是负数
+begin atomic
+    insert into borrower                 
+        values (nrow.customer, -nrow.balance);   ← 【做什么】①记欠款
+    update account set balance = 0               ← 【做什么】②拉回 0
+        where account_number = nrow.account_number;
+end
+```
+>在 employee 表上建触发器，只要有人把某员工的 salary 改成比原来低的值，就把这次降薪记录插到 salary_log 表（记员工ID、旧工资、新工资）。
+
+```
+create trigger employee_trigger
+after update of salary on employee
+referencing new row as nrow 
+for each row
+when nrow.salary
+```
