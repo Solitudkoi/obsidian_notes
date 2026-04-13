@@ -88,5 +88,9 @@ create trigger employee_trigger
 after update of salary on employee
 referencing new row as nrow 
 for each row
-when nrow.salary
+when nrow.salary<employee.salay
+begin atomic
+	insert into salary_log
+		values(nrow.id,employee.salary,nrow.salary)
+end
 ```
