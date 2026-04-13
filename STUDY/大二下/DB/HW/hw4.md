@@ -101,6 +101,5 @@ end
 ```
 GRANT SELECT ON instructor TO Alice with grant option;
 GRANT SELECT ON instructor TO Bob;
-
-
+REVOKE SELECT ON instructor FROM Alice CASCADE;
 ```
