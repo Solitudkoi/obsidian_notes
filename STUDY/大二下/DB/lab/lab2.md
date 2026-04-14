@@ -15,7 +15,8 @@
 ![[Pasted image 20260330101958.png]]
 
 
-```
+```sql
+
 mysql -u root -p
 
 SHOW DATABASES;
@@ -74,12 +75,7 @@ ALTER TABLE branch
 ADD manager VARCHAR(50);
 
 DESCRIBE branch;
-
-
 ```
-
-
-
 
 ## 三、索引的建立与删除
 
