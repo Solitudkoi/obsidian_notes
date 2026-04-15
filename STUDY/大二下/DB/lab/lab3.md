@@ -41,7 +41,7 @@ CREATE TABLE Department (
     dept_id   CHAR(4)      NOT NULL,
     dept_name VARCHAR(50)  NOT NULL,
     location  VARCHAR(100),
-    CONSTRAINT pk_dept PRIMARY KEY (dept_id)          -- PRIMARY KEY
+    PRIMARY KEY (dept_id)          -- PRIMARY KEY
 );
 
 -- 1-2 学生表（引用 Department，并含 CHECK 约束）
@@ -51,13 +51,13 @@ CREATE TABLE Student (
     gender    CHAR(1)      NOT NULL,
     age       TINYINT      NOT NULL,
     dept_id   CHAR(4),
-    CONSTRAINT pk_stu  PRIMARY KEY (stu_id),           -- PRIMARY KEY
-    CONSTRAINT fk_stu_dept FOREIGN KEY (dept_id)
+    PRIMARY KEY (stu_id),           -- PRIMARY KEY
+    FOREIGN KEY (dept_id)
         REFERENCES Department(dept_id)
         ON DELETE SET NULL                             -- ON DELETE
         ON UPDATE CASCADE,                             -- ON UPDATE
-    CONSTRAINT chk_gender CHECK (gender IN ('M','F')), -- CHECK
-    CONSTRAINT chk_age    CHECK (age BETWEEN 14 AND 60)-- CHECK
+    CHECK (gender IN ('M','F')), -- CHECK
+    CHECK (age BETWEEN 14 AND 60)-- CHECK
 );
 
 -- 1-3 课程表
@@ -65,8 +65,8 @@ CREATE TABLE Course (
     course_id   CHAR(6)     NOT NULL,
     course_name VARCHAR(60) NOT NULL,
     credit      TINYINT     NOT NULL,
-    CONSTRAINT pk_course PRIMARY KEY (course_id),
-    CONSTRAINT chk_credit CHECK (credit > 0)
+    PRIMARY KEY (course_id),
+    CHECK (credit > 0)
 );
 
 -- 1-4 选课表（引用 Student 和 Course，含 CHECK）
@@ -74,7 +74,7 @@ CREATE TABLE Enrollment (
     stu_id    CHAR(10) NOT NULL,
     course_id CHAR(6)  NOT NULL,
     score     DECIMAL(5,2),
-    CONSTRAINT pk_enroll  PRIMARY KEY (stu_id, course_id),
+    PRIMARY KEY (stu_id, course_id),
     CONSTRAINT fk_enroll_stu FOREIGN KEY (stu_id)
         REFERENCES Student(stu_id)
         ON DELETE CASCADE                              -- 级联删除
