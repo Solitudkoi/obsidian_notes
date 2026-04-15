@@ -41,7 +41,7 @@ CREATE TABLE Department (
     dept_id   CHAR(4)      NOT NULL,
     dept_name VARCHAR(50)  NOT NULL,
     location  VARCHAR(100),
-    PRIMARY KEY (dept_id)          -- PRIMARY KEY
+    PRIMARY KEY (dept_id)          
 );
 
 -- 1-2 学生表（引用 Department，并含 CHECK 约束）
@@ -51,13 +51,13 @@ CREATE TABLE Student (
     gender    CHAR(1)      NOT NULL,
     age       TINYINT      NOT NULL,
     dept_id   CHAR(4),
-    PRIMARY KEY (stu_id),           -- PRIMARY KEY
+    PRIMARY KEY (stu_id),           
     FOREIGN KEY (dept_id)
         REFERENCES Department(dept_id)
-        ON DELETE SET NULL                             -- ON DELETE
-        ON UPDATE CASCADE,                             -- ON UPDATE
-    CHECK (gender IN ('M','F')), -- CHECK
-    CHECK (age BETWEEN 14 AND 60)-- CHECK
+        ON DELETE SET NULL                            
+        ON UPDATE CASCADE,                             
+    CHECK (gender IN ('M','F')), 
+    CHECK (age BETWEEN 14 AND 60)
 );
 
 -- 1-3 课程表
@@ -75,15 +75,15 @@ CREATE TABLE Enrollment (
     course_id CHAR(6)  NOT NULL,
     score     DECIMAL(5,2),
     PRIMARY KEY (stu_id, course_id),
-    CONSTRAINT fk_enroll_stu FOREIGN KEY (stu_id)
+    FOREIGN KEY (stu_id)
         REFERENCES Student(stu_id)
-        ON DELETE CASCADE                              -- 级联删除
+        ON DELETE CASCADE                              
         ON UPDATE CASCADE,
-    CONSTRAINT fk_enroll_course FOREIGN KEY (course_id)
+    FOREIGN KEY (course_id)
         REFERENCES Course(course_id)
-        ON DELETE RESTRICT                             -- 禁止删除被引用课程
+        ON DELETE RESTRICT                            
         ON UPDATE CASCADE,
-    CONSTRAINT chk_score CHECK (score IS NULL OR score BETWEEN 0 AND 100)
+    CHECK (score IS NULL OR score BETWEEN 0 AND 100)
 );
 
 SELECT '=== STEP 1 完成：表结构创建成功 ===' AS info;
