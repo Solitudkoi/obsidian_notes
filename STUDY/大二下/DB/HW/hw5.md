@@ -65,3 +65,30 @@ b. Now extend the full E-R diagram to model the case where a shopping bas
 ket may contain any combination of books, Blu-ray discs, or downloadable
 
 video.
+
+![[Pasted image 20260421190153.png]]
+6.22
+
+Design a database for an automobile company to provide to its dealers to assist
+
+them in maintaining customer records and dealer inventory and to assist sales
+
+staff in ordering cars.
+
+Each vehicle is identified by a vehicle identification number (VIN). Each indi
+
+vidual vehicle is a particular model of a particular brand offered by the company
+
+(e.g., the XF is a model of the car brand Jaguar of Tata Motors). Each model
+
+can be offered with a variety of options, but an individual car may have only
+
+some (or none) of the available options. The database needs to store informa
+
+tion about models, brands, and options, as well as information about individual
+
+dealers, customers, and cars.
+
+Your design should include an E-R diagram, a set of relational schemas, and
+
+a list of constraints, including primary-key and foreign-key constraints.
