@@ -297,3 +297,712 @@ public ApiResult resetDatabase() {
 new Yaml().load(new BufferedReader(new FileReader("D:\\lab5\\application.yaml")));
 
 ![](https://cdn.nlark.com/yuque/0/2023/png/29437275/1683513405869-a017b65b-3c24-4592-9d91-9cd465bc474e.png)
+
+
+# 实验五：bonus部分
+# 实验要求
+
+欢迎来到bonus部分！
+
+在这里，你需要根据刚刚在基础部分实现的接口，使用BS体系完成一个精简的图书管理系统。
+
+[后端](https://www.yuque.com/wuchengunsuhuang/tup2as/yxutzyqq8thhgp2u#Fri9f)使用Java实现，接收来自前端的请求，调用你所实现的接口实现处理逻辑，并给出响应。
+
+[前端](https://www.yuque.com/wuchengunsuhuang/tup2as/yxutzyqq8thhgp2u#QsRWH)使用Vue3实现，与用户进行交互，向后端发出请求并处理响应。
+
+我们发现，在之后的课程、如B/S体系软件设计、软件工程、软件工程基础、软件工程管理、软件需求工程、大规模实验等许多课（软工导致的）中涉及到数据库应用的部分均为BS体系，因此相信完成这个bonus一定会令你有所收获！
+
+# 可以参考的完成本bonus的顺序
+
+为了引导你较为顺利地完成本bonus部分，我们提出几个小任务，或许你可以按照这样的顺序进行尝试：
+
+1. 阅读下文教程
+2. 阅读前端`src/compoents/Card.vue`内`QueryCards()`里的GET /card请求和后端的GET /card处理逻辑，理解网络请求和响应的写法
+3. 启动后端，并使用浏览器访问`http://localhost:8000/card`查看后端GET /card响应结果
+4. 启动前端，在浏览器打开控制台(右键菜单“检查”或F12)，选择“网络”菜单，之后在前端点击“借书证管理”，可以发现card网络包，阅读网络包的信息
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1709777030116-df25d382-f09c-4227-9c5e-305783aa7bbf.png)
+
+5. 根据你的理解，修改GET /card的后端代码，随意修改传递的借书证对象的值，观察前端变化，理解后端是如何影响前端的
+
+请注意，在修改后端代码后需要重新启动后端才能生效。
+
+6. 根据你的理解，修改GET /card的后端代码，调用你基础部分实现的查询借书证接口，使得前端能够显示你数据库中的内容
+7. 阅读前端`src/compoents/Borrow.vue`内`QueryBorrows()`里的GET /borrow请求，在后端完成一个GET /borrow请求，调用使得前端可以正常显示
+8. 阅读前端`src/compoents/Card.vue`内`ConfirmNewCard()`里的POST /card请求，在后端修改POST /card请求，调用你基础部分实现的新增借书证接口，使得前端的相应操作可以影响你本地的数据库
+9. 根据你的理解，完成修改借书证内容的前后端处理逻辑，并验证前端的操作可以正常影响你本地的数据库
+10. 完成借书证管理页面和借书记录管理页面的所有逻辑
+
+由于此时还没有实现图书管理，涉及到相关操作(比如说借书记录的存在依赖于图书的存在)时你可以通过本地的DBMS手动添加一些数据以供临时调试使用。
+
+11. 理解`<input>`(或`<el-input>`)和`<button>`(或`<el-button>`)，在图书管理页面添加一些输入框和一个按钮，并利用这些输入框和按钮尝试实现一个图书入库功能，保证前端的操作可以正常影响你本地的数据库
+12. 完善图书管理页面前端，实现[基础部分指导书](https://www.yuque.com/yingchengjun/ozqlqv/gnwbgi9my2ci7has?singleDoc#%20%E3%80%8A%E5%AE%9E%E9%AA%8C%E4%BA%94%EF%BC%9A%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E3%80%8B)中要求的所有功能，完成本bonus
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1711595199100-d8430db3-b330-4e3a-b932-6581c31a842c.png)
+
+# 开头：啥是前后端
+
+## 首先，来点计网+OS
+
+首先我们得知道，啥是进程（process）。字面上来看，进程就是一个进行中的程序，或许你可以这么理解，静止存储在磁盘上的一行行代码和数据在内存中跑起来，就产生了进程。比如，你下载了很多app，平常没运行的时候，他们的代码和数据在磁盘上，一旦启动，他们就被或多或少装入内存：
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1709698212285-734fc20a-245a-41ef-8a8f-a36cbf3e4b37.png)
+
+再想想，平常你在使用微信的时候，信息从你的设备上的微信进程到了另一些设备上的微信进程中，也就是说，我们想让信息在不同设备上的进程之间流通，信息需要知道它从哪个进程来，到哪个进程去。于是你会想到：我们如何标识一台设备的进程呢？**IP+端口号**。例如，127.0.0.1:80很可能是运行在你的个人设备上的HTTP服务端。
+
+计算机网络让设备联系在一起。目前的互联网采用一个分层架构。Web前后端开发涉及的更多是**TCP层**和**应用层**。TCP层可以做到点对点通信，让信息从一个设备的进程到另一个设备的进程；应用层负责规定点对点通信的内容长啥样、遵守什么规范等，最常见的应用层协议之一就是HTTP。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1709698809160-ca84163c-b227-406c-bc36-286f850df5c8.png)
+
+## HTTP协议
+
+HTTP协议是一个请求——响应式协议。一个client向server发出request，server向client返回response。
+
+HTTP的请求有请求头、请求体等信息。比较重要的有请求方式（GET、POST、DELETE、PUT、OPTIONS等）、URL（请求的资源在哪）、一些重要的header（比如跨域相关）。有可能请求会带有参数、表单。
+
+HTTP的响应比较重要的有状态码（比如200代表成功，5开头服务器有问题等）、header、被请求的资源等。
+
+## Web发展
+
+最开始的Web1.0阶段，server端通常返回一个渲染好的静态页面就行（想想零几年的XX论坛Orz）。但是随着人们日渐增长的需求，Web开发分成了两个部分：前端和后端。其中，前端由HTML、CSS、JS三件套组成（网页的骨架、样式、行为），主要负责和用户交互的部分；后端向前端提供查询数据的API。
+
+当然这只是大体架构，你也可以在开发的时候套一些中间件之类的，或者是把后端拆成微服务架构等等，前面的路以后再来探索吧（
+
+# 后端部分
+
+## 选啥语言
+
+目前来看，用的多的Web后端技术栈有Java、Go、Node.js等（或许你很想试试Rust😈）。Java很早就入局Web开发，在写业务逻辑方面已经很成熟了，更不用说有Spring全家桶这种无敌的存在。Go是现在很多互联网企业转向的技术栈，比如某鹅、某度、某跳动，这个语言很适合写网络服务、中间件和云原生（找工也许没Java卷）。剩下个Node，由于它用的是单线程事件队列，它在IO密集型服务端很有优势（最有优势的是用JS写的，前端同学想转全栈的话走Node就很自然）。
+
+因为整个图书管理系统是Java的，而且单元测试已经写的很好了，就接着**Java**吧Orz
+
+目前来看，由于本实验重点还是数据库，所以只会用简单的自带类，不会用Spring全家桶或者MyBatis之类的，同学们在以后的软件工程基础/软件工程/BS体系结构设计课程上再用吧～
+
+核心包：[https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/package-summary.html](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/package-summary.html)
+
+## 后端API制定
+
+首先，我们可以在前后端之间传递[JSON](https://www.yuque.com/wuchengunsuhuang/tup2as/yxutzyqq8thhgp2u#rR49P)。
+
+然后，我们的API制定需要遵从一定的规则，如RPC（可以试试gRPC）、SOAP（xml相关）、REST。在本实验中，我们采用**REST**风格的API制定模式。
+
+如何制定RESTful的API呢，想想我们请求某某资源，是不是有个动作（请求）和动作承受者（资源），于是我们也可以把动词和名词分开：动词就是HTTP的请求方法，如GET、POST、PUT、DELETE；名词就是请求的资源。
+
+例子：
+
+```
+GET 	 /user    			 # 获取用户
+PUT 	 /user    			 # 更新用户
+POST   /user    			 # 创建用户
+DELETE /user    			 # 删除用户
+
+GET    /user/history   # 获取用户历史信息
+PUT    /school/{id}   # 更新主键为{id}的学校信息
+...
+```
+
+如果真的是要进行团队内的前后端对接，你可以用API Fox等软件构建文档，写完之后直接测试也行（记得这个测试是不跨域的，最后所有接口测试完要测跨域问题）
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1709729242461-e7fbe649-c1b6-48d3-b386-dce7a3571920.png)
+
+(不过如果你只是为了完成lab5这一部分，直接一个POST走天下也不是不行，虽然不太优雅（
+
+## 跨域问题
+
+这是个前后端分离的项目，前端是一个运行在localhost:5173的进程，后端是一个运行在localhost:8000的进程（也可以其他端口，比如8001），我们在处理所有用户发来的请求时，实际上是用户操作前端页面，触发事件之后，由前端向后端发送请求。
+
+这就产生了跨域问题。典型的报错大概长这样：
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1713864486930-97e80c5b-0936-4505-bb95-41fc700760f4.png)
+
+解决的方法很多，在本项目中我们采取后端加上请求头的方式处理：
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1713864544689-d957e239-a05b-4ae9-bd89-4afb9aa68344.png)
+
+## 咋写呢
+
+### 主类
+
+从上面的内容可以看出，后端需要解析来自前端的请求，分配路由（具体的请求用哪个handler去处理），然后查询数据库、返回数据等。
+
+**Java是一个Pure OOP语言，我们需要实现一个含main方法的主类。下面是主类的main方法，Java程序从这里启动，Lab5之前单元测试过的代码可以在主类中调用。**首先，我们在本地的8000端口创建了一个服务器（也就是127.0.0.1:8000），在/card处绑定一个我们的CardHandler（也就是说，URL为127.0.0.1:8000/card的请求都会由我们的CardHandler处理）。启动服务器即可。
+
+```
+public class Main {
+    // main方法，代码从这开始
+    public static void main(String[] args) throws IOException {
+        // 创建HTTP服务器，监听指定端口
+        // 这里是8000，建议不要80端口，容易和其他的撞
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+
+        // 添加handler，这里就绑定到/card路由
+        // 所以localhost:8000/card是会有handler来处理
+        server.createContext("/card", new CardHandler());
+
+        // 启动服务器
+        server.start();
+
+        // 标识一下，这样才知道我的后端启动了（确信
+        System.out.println("Server is listening on port 8000");
+    }
+    
+    // 剩下的Main class...
+```
+
+接下来就是我们的CardHandler类。
+
+首先，第一行implements非常重要，实现了HttpHandler接口的类才能作为Handler。
+
+Handle部分，首先在Header带上Access的三个玩意儿，这是为了解决跨域问题（不带上的话，出于安全性考虑，前端无法调用后端API）。然后解析请求方法，这里我们主要处理GET和POST方法。
+
+```
+static class CardHandler implements HttpHandler {
+        // 关键重写handle方法
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            // 允许所有域的请求，cors处理
+            Headers headers = exchange.getResponseHeaders();
+            headers.add("Access-Control-Allow-Origin", "*");
+            headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            headers.add("Access-Control-Allow-Headers", "Content-Type");
+            // 解析请求的方法，看GET还是POST
+            String requestMethod = exchange.getRequestMethod();
+            // 注意判断要用equals方法而不是==啊，java的小坑（
+            if (requestMethod.equals("GET")) {
+                // 处理GET
+                handleGetRequest(exchange);
+            } else if (requestMethod.equals("POST")) {
+                // 处理POST
+                handlePostRequest(exchange);
+            } else if (requestMethod.equals("OPTIONS")) {
+                // 处理OPTIONS
+                handleOptionsRequest(exchange);
+            } else {
+                // 其他请求返回405 Method Not Allowed
+                exchange.sendResponseHeaders(405, -1);
+            }
+        }
+}
+```
+
+### GET
+
+然后我们处理GET的请求。其实操作就是先加个application/json的header，然后通过一个OutputStream把一个字节序列发过去。最后记得关闭OutputStream。
+
+当然，这里只是很简单地传了一个固定的JSON，实际操作中，我们可以在这里查询数据库，获取到数据库中的实际数据，并转成字节流传递给前端。
+
+如果处理请求时出了错误，记得try-catch处理掉，并且对应状态码也不能是200。在[https://developer.mozilla.org/zh-CN/docs/Web/HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)里你能找到很多状态码和它们的应用场景。
+
+如果GET请求带参数，一般是在URL上，一种是附带的`Query`，例如`/api/users?id=12345&name=John`，可以通过一些Java方法获取id和name的值；一种是路径上的`Param`，形式上是`/api/users/{id}`，实际请求中是`/api/users/5`，这个5就是id。获取这些参数后，后端程序可以进行一些额外处理。
+
+```
+ private void handleGetRequest(HttpExchange exchange) throws IOException {
+            // 响应头，因为是JSON通信
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            // 状态码为200，也就是status ok
+            exchange.sendResponseHeaders(200, 0);
+            // 获取输出流，java用流对象来进行io操作
+            OutputStream outputStream = exchange.getResponseBody();
+            // 构建JSON响应数据，这里简化为字符串
+            // 这里写的一个固定的JSON，实际可以查表获取数据，然后再拼出想要的JSON
+            String response = "[{\"cardId\": 1, \"name\": \"John Doe\", \"department\": \"Computer Science\", \"type\": \"Student\"}," +
+                    "{\"cardId\": 2, \"name\": \"Jane Smith\", \"department\": \"Electrical Engineering\", \"type\": \"Faculty\"}]";
+            // 写
+            outputStream.write(response.getBytes());
+            // 流一定要close！！！小心泄漏
+            outputStream.close();
+        }
+```
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1709717518034-c9358203-07fa-43d8-89b2-3f21ede32a39.png)
+
+#### JSON相关
+
+可以看出，我们GET时传递的是一个写死的字符串JSON：
+
+![](https://cdn.nlark.com/yuque/0/2024/png/34246589/1713865163434-a2cfc1b3-97f9-468d-abea-d5a5ca682392.png)
+
+也就是说，你可以通过学习JSON规范[https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/JSON](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/JSON)，**手写字符串**来解析JSON，具体可以实现在你想解析成JSON的对象类内的toString()方法里（或者写个toJSONString()方法）。
+
+但是这样的效率肯定有点低，究其原因是Java没有自带JSON相关库（连Go都有）。你可以使用阿里的`fastjson`、开源库`jackson`等。你可以在maven官方库找到它们：
+
+[https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2](https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2)
+
+[https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl](https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl)
+
+然后，在你项目的`pom.xml`的`<dependencies>`下面复制粘贴网站上的`<dependency>`标签，等待远程库被拉过来即可。
+
+具体使用方法也可以参照国内网站。
+
+### POST
+
+然后，我们尝试处理POST请求。首先解析request body（因为POST请求附带的数据都在请求体里），然后读取POST附带的数据。
+
+实际操作中，解析到POST发来的数据，你可以利用数据对表进行增删改查。
+
+```
+private void handlePostRequest(HttpExchange exchange) throws IOException {
+    // 读取POST请求体
+    InputStream requestBody = exchange.getRequestBody();
+    // 用这个请求体（输入流）构造个buffered reader
+    BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+    // 拼字符串的
+    StringBuilder requestBodyBuilder = new StringBuilder();
+    // 用来读的
+    String line;
+    // 没读完，一直读，拼到string builder里
+    while ((line = reader.readLine()) != null) {
+        requestBodyBuilder.append(line);
+    }
+
+    // 看看读到了啥
+    // 实际处理可能会更复杂点
+    System.out.println("Received POST request to create card with data: " + requestBodyBuilder.toString());
+
+    // 响应头
+    exchange.getResponseHeaders().set("Content-Type", "text/plain");
+    // 响应状态码200
+    exchange.sendResponseHeaders(200, 0);
+
+    // 剩下三个和GET一样
+    OutputStream outputStream = exchange.getResponseBody();
+    outputStream.write("Card created successfully".getBytes());
+    outputStream.close();
+}
+```
+
+### 处理请求的参数
+
+GET方法，请求体一般为空，参数在URL上，比如`https://www.test.org/card?id=1&name=3`，请求的路径是`https://www.test.org/card`，参数是`id`和`name`，值为`1`和`3`。
+
+POST或其他方法，一般参数在请求体，有表单、JSON等形式。如果像本实验中一样，前后端已经约定好了JSON格式的API，直接读取转换成字符串处理也是可以的。
+
+具体的处理方法可以查网上的文档或官方文档：[https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/package-summary.html](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/package-summary.html)
+
+### OPTIONS
+
+在前端发请求时，如果请求比较复杂，例如非GET、非简单POST的XHR请求，浏览器的`XMLHttpRequest`会先发一次预检请求，方法为`OPTIONS`，**然后才会发之后的请求**。所以我们需要实现一个函数去处理这个预检请求，参考上面的`POST`处理，返回状态码`204`(status no content)，然后把请求结束即可。
+
+## 扩展
+
+仅针对这个实验而言，我们可以实现更多的类，实现HttpHandler接口，这样就可以在特定路由上绑定处理器。每个处理器可以针对不同的请求方法调用不同的业务逻辑处理函数。在本实验中，不要求严格遵守REST的API规范，甚至全GET/POST请求也行（当然如果是正式程序肯定不行x）
+
+如果是很大的高并发程序之类的，等到后端足够复杂，接口太多，效率太低的时候，可以尝试进行微服务拆分。如果你有构建分布式系统的需求，可以试试gRPC。数据库方面，可以加一层Redis作为缓存，可以使用ORM代替JDBC等。
+
+## 注意的坑
+
+1. 跨域问题需要前后端联调发现，如果你用API Fox或者Postman单独调试后端，很可能没啥问题，前端后端部署后因为跨域问题挂了。除了上文中加上请求头的方式，还可以在前端/后端用一些代理（搜搜http-proxy-middleware中间件、Nginx应用）。
+2. 与C不同，在Java中，Object通过引用的方式传递，而不是值。
+
+# 前端部分
+
+## #1 前端部分介绍
+
+本项目使用[Vue3](https://cn.vuejs.org/)作为框架，并使用了[Element Plus](https://element-plus.org/zh-CN/)组件库，你可以点击链接了解它们的使用方法。
+
+当然，你也可以使用任何你喜欢的组件库。
+
+在本实验中，你只需要完善`src/components/`下的`Book.vue`、`Borrow.vue`和`Card.vue`文件。
+
+其中，`Borrow.vue`和`Card.vue`的页面已经写好，你只需完善其中的逻辑，向后端发起网络请求并处理响应。
+
+`Book.vue`的页面留待你来探索，祝你收获从头开始搭建一个页面的成就感。
+
+[#3 基础知识](https://www.yuque.com/wuchengunsuhuang/tup2as/yxutzyqq8thhgp2u#RR2q2)部分提供了一些或许对实现前端部分有所帮助的教程。
+
+## #2 环境配置
+
+为了完成这个bonus的前端部分，首先需要具备[Node.js](https://nodejs.org/en)环境，你可以自行参考相关教程进行安装。
+
+在安装完成后，在终端输入`npm -v`，如果看到版本信息，说明安装成功。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1709654293919-14412304-d935-4d23-887f-0ae6b1b41d9e.png)
+
+将前端部分代码下载后，在其所在文件夹打开终端，输入`npm install`，将自动下载项目所需依赖，稍作等待，当显示以下信息时安装完成。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1709654689803-e4fc59cb-298f-4d0c-8d35-5cdac949d494.png)
+
+此时，项目已经可以运行，在其所在文件夹打开终端，输入`npm run dev`即可运行，当显示如下信息时运行成功，此时在浏览器中输入终端显示的URL（本例中为`http://localhost:5173/`）即可打开。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1709654769170-f64fb994-9180-454c-8984-006544744a8a.png)
+
+**如果使用VS Code开发，建议安装**[**Vue Official**](https://marketplace.visualstudio.com/items?itemName=Vue.volar)**扩展。**
+
+Vue支持热重载，当你修改 `.vue` 文件时，该组件的所有实例将在不刷新页面的情况下被替换，也就是说，在修改文件后你可以实时在页面中查看效果，而不需要重新打开、刷新页面等操作。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1709654909966-a2dbb6db-8b44-4657-862e-d48b094a332a.png)
+
+## #3 基础知识
+
+以下对与本项目相关的一些重要基础知识进行介绍。
+
+关于项目目录的文件组织，你可以通过[此处](https://www.runoob.com/vue2/vue-directory-structure.html)了解。
+
+### #3.1 `Vue`文件结构
+
+总得来说，**Vue文件由template、style、script三部分组成**，可以暂时理解为它们与“前端三件套”HTML、CSS、JavaScript一一对应，分别控制页面的结构（页面中有什么）、样式（页面中的元素长什么样）与行为（页面中的元素可以做什么）。
+
+```
+<template>
+  ...
+</template>
+<style>
+  ...
+</style>
+<script>
+  ...
+</script>
+```
+
+本项目对展示的美观程度不做要求，因此只对template和script做讲解，感兴趣的同学可以自行了解[CSS](https://www.runoob.com/css/css-tutorial.html)部分。
+
+#### #3.1.1 template块
+
+template块支持[HTML](https://www.runoob.com/html/html-tutorial.html)语法，即`<element>`和`</element>`标签标注了一个元素的开始和结束，其中element代表那个元素的类型。例如，`<p>数据库系统</p>`表示一个段落，其内容为“数据库系统”。在一个元素的开始标签内部，你可以追加一些内容来表示这个元素的属性，例如`<a href="http://cspo.zju.edu.cn">浙江大学计算机科学与技术学院</a>`表示一个链接，点击后将跳转到`http://cspo.zju.edu.cn`这个网址。
+
+在HTML的基础上，Vue增加了一些属性，在本项目中你可能会用到：
+
+- `v-model`属性
+
+这个属性为template中的表单内容和script中的内容建立了双向绑定，使得你在表单中输入的数据能够实时更新并且显示出来。
+
+例如`<input v-model="text"></input>`表示这个输入框的值为script中`text`这一变量的值，当template和script中任意一方变化时另一方会同步变化。(熟悉HTML的同学可以理解为它与`<input :value="text" @input="event => text = event.target.value"></input>`的写法效果相同)
+
+- `v-if`&`v-else`属性
+
+这个属性控制一个元素显示出来的条件。
+
+例如，`<p v-if="condition">这个段落将在condition值为true时显示，否则不会显示</p>`。
+
+- `v-for`属性
+
+这个属性可以基于script中的数据多次渲染元素，其值为`alias in iterable`。
+
+例如，`<div v-for="book in books"></div>`将为`books`数组中的每一个元素都创建一个块。
+
+- `v-on / @`属性
+
+这个属性可以为元素绑定一个监听器，一般为`@event`格式，其中本项目中可能会用到`@click`。
+
+例如，
+
+- `<button @click="Increment">这个按钮被点击时会调用Increment函数</button>`
+- `<button @click="Increment(1)">这个按钮被点击时会调用Increment函数并传递参数1</button>`
+- `<button @click="i=1, Increment(1)">这个按钮被点击时会将i赋值为1，之后调用Increment函数并传递参数1</button>`
+
+除了这些属性外，你还需要了解双大括号语法，双大括号及其所括起来的内容类似于一个占位符，它将被替换为它括起来的内容的值。例如有一个`text`变量值为`Hello Database`，你使用`<p>{{ text }}</p>`时将得到一个内容为`Hello Database`的段落。
+
+以下给出了一个综合使用以上用法的例子：
+
+```
+<div v-for="student in students" v-if="student.department=='CS'">
+  修改{{student.name}}的成绩：
+  <input v-model="student.grade"></input>
+  <button @click="ModifyGrade(student.id,student.grade)">修改</button>
+</div>
+```
+
+我们假设在script块中存在一个`students`数组，其中的每个元素都具备`id`,`name`,`department`, `grade`属性，以上代码的功能是：为每一个部门为CS的学生显示一块内容，这块内容首先包括一段“修改XXX的成绩：”的文本，其中XXX是这个学生的名字，接着是一个显示着他的成绩的输入框，接着是一个显示“修改”二字的按钮，点击按钮后会将这个学生的学号和成绩作为参数，调用`ModifyGrade`函数。
+
+如果能够理解以上示例，你已经具备了完成本项目template部分的基本技能，如果想要了解更多，可以阅读Vue3官方文档。
+
+最后简要介绍一下Element Plus组件库，它或许可以使你的开发更为便捷和美观。你可以在组件库中找到你想要使用的组件，并通过查看源代码功能得到它的代码，将它复制到你的项目中并作适当修改便可以使用。组件的属性可以在Element Plus提供的官方文档中查询。
+
+当然，只使用HTML原生元素同样可以完成本项目。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/33575985/1709695982669-20476e62-1209-45d3-83aa-c790d7c59b24.png)
+
+#### #3.1.2 script块
+
+script块使用[JavaScript](https://www.runoob.com/js/js-tutorial.html)语法，本框架中使用的是Vue的**选项式API风格**，其结构大致为：
+
+```
+<script>
+import ...
+export default(){
+  data(){
+    return{
+      variable1: value,
+      variable2: value,
+      ...
+    }
+  },
+  methods:{
+    function1(params){
+      ...
+    },
+    function2(params){
+      ...
+    },
+      ...
+  },
+  (lifecycles...)
+}
+</script>
+```
+
+- import部分导入了其他模块导出的内容，例如在框架中你将会看到`import axios from 'axios'`。
+- export default部分导出了本文件的接口，在本次实验中暂时不需要了解其中的原理。
+- data部分给出了本文件中用到的数据，你可以理解为这里用来定义本组件的全局变量、供其他部分（比如template块）使用。
+- methods部分定义了本文件中用到的函数。
+- lifecycles是Vue的生命周期钩子函数，将会在特定阶段自动执行，比较常用的有：mounted()在页面被渲染后执行，updated()在页面数据发生变化时执行...
+
+关于这部分内容，我们将在稍后介绍完axios后给出示例。
+
+### #3.2 网络请求
+
+#### #3.2.1 axios
+
+[axios](https://www.axios-http.cn/)是一个基于promise的网络请求库，本项目中我们通过axios向后端发送网络请求(request)并接收响应(response)，其中主要使用GET和POST方法，在此作简要介绍。
+
+我们需要使用到的基本格式如下：
+
+```
+axios.get(url[, config])
+  .then(response=>{
+    ...
+  })
+```
+
+```
+axios.post(url[, data[, config]])
+  .then(response=>{
+    ...
+  })
+```
+
+- url
+
+它们都具有url参数，我们在`src/main.js`里配置了`baseURL`：
+
+```
+axios.defaults.baseURL = 'http://localhost:8000';
+```
+
+它将会与你在调用axios函数时给出的url参数一起拼成即将接受请求的URL，例如在url给出`'/book'`时将向`http://localhost:8000/book`发出网络请求。
+
+如果你不使用 8000端口，请到`src/main.js`修改。
+
+- GET参数/POST请求负载
+
+axios函数的第二个参数有所不同，当你使用GET时需要通过`{params:{...}}`的方式给出参数，而使用POST时可以直接通过`{...}`给出请求负载。
+
+- then
+
+`.then()`的参数是一个函数，当发出的请求收到后端的响应后，axios函数自动调用这个函数。
+
+我们在这里使用`response=>{...}`的形式被称作箭头函数，其中`response`是参数，`{...}`部分是函数体，这种写法与`func(response){...}`的区别是这样不会改变`this`，即仍然可以通过`this`来操作`script`块中`data`部分的变量。
+
+- response
+
+这个参数接收到的是后端给出的网络响应(response)，其中它的`data`成员是响应的内容，也就是说，如果后端发送给前端一个整数，那么`response.data`就是这个整数，而如果后端发送给前端一个对象，那么`response.data`也就是这个对象。(注意不是`response`，而是`response.data`)
+
+#### #3.2.2 JSON
+
+[JSON](https://www.runoob.com/json/json-tutorial.html)是JavaScript的对象表示法（**J**ava**S**cript **O**bject **N**otation），是一种轻量级的文本数据交换格式，我们以此来在前后端之间交换数据。使用方括号`[...]`表示数组，使用花括号`{...}`表示对象，使用键值对`key: value`来表示数据，键需要用引号括起来，数据之间用逗号分隔。例如，前后端之间可以传递这样的数据：
+
+```
+[
+  {
+    "id":1,
+    "name":"王小明",
+    "department": "CS",
+    "type": "学生"
+  },
+  {
+    "id":2,
+    "name":"王老师",
+    "department": "CS",
+    "type": "教师"
+  }
+]
+```
+
+这表示一个包含两个对象的数组，其中每个对象都有id、name、department和type四个成员。
+
+### #3.3 示例介绍
+
+我们就框架中的一段具体代码，来帮助你深入理解以上内容。
+
+```
+<el-button @click="newCardInfo.name = '', 
+  newCardInfo.department = '', newCardInfo.type = '学生', newCardVisible = true">
+</el-button>
+...
+<el-dialog v-model="newCardVisible" title="新建借书证">
+  <div>
+    姓名：<el-input v-model="newCardInfo.name" clearable />
+  </div>
+  <div>
+    部门：<el-input v-model="newCardInfo.department" clearable />
+  </div>
+  <div>
+    类型：
+    <el-select v-model="newCardInfo.type">
+    <el-option v-for="type in types" :key="type.value" :label="type.label" :value="type.value" />
+    </el-select>
+  </div>
+
+  <template #footer>
+  <span class="dialog-footer">
+    <el-button @click="newCardVisible = false">取消</el-button>
+    <el-button type="primary" @click="ConfirmNewCard"
+  :disabled="newCardInfo.name.length === 0 || newCardInfo.department.length === 0">确定</el-button>
+      </span>
+  </template>
+</el-dialog>
+  
+<script>
+import { ElMessage } from 'element-plus'
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      types: [
+        {
+          value: '教师',
+          label: '教师',
+        },
+        {
+          value: '学生',
+          label: '学生',
+        }
+      ],
+      newCardVisible: false,
+      newCardInfo: {
+        name: '',
+        department: '',
+        type: '学生'
+      },
+    }
+  },
+  methods: {
+    ConfirmNewCard() {
+      axios.post("/card",
+                 {
+                   name: this.newCardInfo.name,
+                   department: this.newCardInfo.department,
+                   type: this.newCardInfo.type
+                 })
+        .then(response => {
+            ElMessage.success("借书证新建成功")
+            this.newCardVisible = false
+            this.queryCards()
+        })
+    },
+  }
+}
+</script>
+```
+
+以上是涉及新建借书证功能的主体代码，我们分段分析：
+
+```
+<el-button @click="newCardInfo.name = '', 
+  newCardInfo.department = '', newCardInfo.type = '学生', newCardVisible = true">
+</el-button>
+...
+<el-dialog v-model="newCardVisible" title="新建借书证">
+  <div>
+    姓名：<el-input v-model="newCardInfo.name" clearable />
+  </div>
+  <div>
+    部门：<el-input v-model="newCardInfo.department" clearable />
+  </div>
+  <div>
+    类型：
+    <el-select v-model="newCardInfo.type">
+    <el-option v-for="type in types" :key="type.value" :label="type.label" :value="type.value" />
+    </el-select>
+  </div>
+  <template #footer>
+  <span class="dialog-footer">
+    <el-button @click="newCardVisible = false">取消</el-button>
+    <el-button @click="ConfirmNewCard"
+  :disabled="newCardInfo.name.length === 0 || newCardInfo.department.length === 0">确定</el-button>
+      </span>
+  </template>
+</el-dialog>
+```
+
+第1行至第3行设置了一个按钮，当它被点击时将设置`newCardInfo`的`name`和`department`为空串，将`type`设置为学生，并将`newCardVisible`设置为true。
+
+之后的部分定义了一个对话框，
+
+- 第5行的v-model属性表示它在`newCardVisible = true`时可见，`title`给定了对话框的标题
+- 第6行至第11行定义了姓名、部门的输入框，他们分别与`newCardInfo.name`和`newCardInfo.department`双向绑定，并设置了`clearable`属性表示这个输入框是可以一键清空的。
+- 第12行至第17行给出了借书证类型的下拉选择框，与`newCardInfo.type`绑定，
+
+- 第15行给出了选择框，其中`v-for`要求遍历`types`中的每项作为下拉选择框的一个选项，其键和值都是`type.value`，显示出来的文字为`type.label`。
+
+- 第18行表示接下来的部分在对话框底部。
+- 第20行设置了一个取消按钮，点击后将设置`newCardVisible`为false。
+- 第21行至第22行设置了一个确定按钮，被点击时将调用`ConfirmNewCard`函数。这个按钮在`newCardInfo.name`和`newCardInfo.department`这两项的任意一项为空时将被禁用。
+
+```
+<script>
+import { ElMessage } from 'element-plus'
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      types: [
+        {
+          value: '教师',
+          label: '教师',
+        },
+        {
+          value: '学生',
+          label: '学生',
+        }
+      ],
+      newCardVisible: false,
+      newCardInfo: {
+        name: '',
+        department: '',
+        type: '学生'
+      },
+    }
+  },
+```
+
+在script块中，先导入了几个需要用到的接口，在其`data`中定义了以下内容：
+
+- types，是一个列表，里面有两个对象，每个对象都有一个value和一个label，用来表示借书证类型。
+- newCardVisible，布尔值，表示新建借书证对话框的可见性。
+- newCardInfo，是一个对象，里面有name、department、type三个成员，用于存储新借书证信息。
+
+```
+  methods: {
+    ConfirmNewCard() {
+      axios.post("/card",
+                 {
+                   name: this.newCardInfo.name,
+                   department: this.newCardInfo.department,
+                   type: this.newCardInfo.type
+                 })
+        .then(response => {
+            ElMessage.success("借书证新建成功")
+            this.newCardVisible = false
+            this.queryCards()
+        })
+    }
+  }
+}
+</script>
+```
+
+methods里面定义了一个函数，名为ConfirmNewCard，无参数，在被调用时向`http://localhost:8000/card`发送一个POST请求，同时向后端传递一个对象，这个对象具有name、department、type三个成员，其值分别为newCardInfo的对应值。在收到后端的响应后，通过ElMessage在页面上弹出一条消息提示借书证新建成功，将对话框可见性设为false，并调用queryCards()函数重新查询现有借书证，以达到更新页面的目的。
+
+```
+async queryCards() {
+    let response = await axios.get('/card')
+    this.cards = []
+    let cards = response.data
+    cards.forEach(card => {
+        this.cards.push(card)
+    })
+}
+```
+
+queryCards()使用了axios的另一种写法，它向`http://localhost:8000/card`发送GET请求，不携带参数。得到响应后，将this.cards清空，创建一个临时变量cards来获取响应负载，将其中的每个元素加到this.cards中。
