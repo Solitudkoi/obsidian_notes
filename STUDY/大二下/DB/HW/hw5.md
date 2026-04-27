@@ -92,3 +92,17 @@ dealers, customers, and cars.
 Your design should include an E-R diagram, a set of relational schemas, and
 
 a list of constraints, including primary-key and foreign-key constraints.
+
+
+
+6.24
+
+Design a database for an airline. The database must keep track of customers
+
+and their reservations, flights and their status, seat assignments on individual
+
+flights, and the schedule and routing of future flights.
+
+Your design should include an E-R diagram, a set of relational schemas, and
+
+a list of constraints, including primary-key and foreign-key constraints.
