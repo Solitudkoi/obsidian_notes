@@ -5,5 +5,8 @@
   "ics",
   "translate",
   "obsidian-excalidraw-plugin",
-  "obsidian-math-plus"
+  "obsidian-math-plus",
+  "notebook-navigator",
+  "obsidian-outliner",
+  "code-styler"
 ]
