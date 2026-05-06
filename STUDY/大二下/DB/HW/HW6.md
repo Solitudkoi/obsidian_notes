@@ -9,7 +9,6 @@ CD → E
 B → D
 E → A
 
-
 7.13 Show that the decomposition in Exercise 7.1 is not a dependency-preserving decomposition.
 
 7.21 Give a lossless decomposition into BCNF of schema R of Exercise 7.1.
