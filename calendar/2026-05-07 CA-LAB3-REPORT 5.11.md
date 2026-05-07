@@ -1,8 +1,8 @@
 ---
-title: DIP-LAB4
+title: CA-LAB3-REPORT 5.11
 allDay: false
-startTime: 14:00
-endTime: 15:30
+startTime: 18:30
+endTime: 20:00
 date: 2026-05-07
 completed: false
 type: single
