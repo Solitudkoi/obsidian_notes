@@ -222,7 +222,7 @@
   "respectCursorPositionWhenAutoPaste": true,
   "blankLineAboveAppendedContent": true,
   "autoCopy": true,
-  "autoFocus": true,
+  "autoFocus": false,
   "autoPaste": false,
   "autoFocusTarget": "last-active-and-open-then-last-paste",
   "autoPasteTarget": "last-active-and-open-then-last-paste",
