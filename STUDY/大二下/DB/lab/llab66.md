@@ -6,10 +6,6 @@ https://www.yuque.com/yingchengjun/minisql
 
 其他同学仅需提交个人详细设计报告
 
-access token：hrjg8f2GhJnV1YngDKeQYm86MQp1OjN1dwk.01.0z0vmm5hv
-
-git clone https://3240103533:hrjg8f2GhJnV1YngDKeQYm86MQp1OjN1dwk.01.0z0vmm5hv@git.zju.edu.cn/3240103533/minisql.git
-
 **2024年5月31日：修复了框架的一些问题，请大家重新拉取代码**
 
 ### 框架链接：[ZJU GitLab链接，请使用内网访问](https://git.zju.edu.cn/zjucsdb/minisql)
