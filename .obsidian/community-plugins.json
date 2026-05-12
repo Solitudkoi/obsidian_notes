@@ -4,5 +4,9 @@
   "obsidian-excalidraw-plugin",
   "code-styler",
   "obsidian-annotator",
-  "obsidian-git"
+  "obsidian-git",
+  "ics",
+  "obsidian-outliner",
+  "obsidian-math-plus",
+  "translate"
 ]
