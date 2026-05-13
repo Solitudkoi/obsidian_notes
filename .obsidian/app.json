@@ -6,5 +6,6 @@
     "margin": "0",
     "downscalePercent": 100
   },
-  "attachmentFolderPath": "储存/图片"
+  "attachmentFolderPath": "储存/图片",
+  "promptDelete": false
 }
