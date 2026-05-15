@@ -1,0 +1,164 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=1.0cm,bottom=1.0cm,left=1.4cm,right=1.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{ifthen}
+\usepackage{setspace}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setstretch{1.02}
+
+% ---------------- Fonts ----------------
+\setmainfont{Times New Roman}
+\IfFontExistsTF{Source Han Sans CN}{\setCJKmainfont{Source Han Sans CN}}{
+  \IfFontExistsTF{Noto Sans CJK SC}{\setCJKmainfont{Noto Sans CJK SC}}{
+    \IfFontExistsTF{Microsoft YaHei}{\setCJKmainfont{Microsoft YaHei}}{\setCJKmainfont{SimSun}}
+  }
+}
+
+% ---------------- Colors ----------------
+\definecolor{accent}{HTML}{A63D40}
+\definecolor{accentdark}{HTML}{7E2E31}
+\definecolor{titletext}{HTML}{222222}
+\definecolor{bodytext}{HTML}{333333}
+\definecolor{subtext}{HTML}{6B7280}
+\definecolor{rulecolor}{HTML}{D8DDE3}
+\definecolor{softbg}{HTML}{F7F4F3}
+
+% ---------------- Section Style ----------------
+\titleformat{\section}
+  {\large\bfseries\color{accentdark}}
+  {}
+  {0pt}
+  {}
+  [{\vspace{0.15em}\color{rulecolor}\titlerule}]
+\titlespacing*{\section}{0pt}{0.65em}{0.4em}
+
+% ---------------- List Style ----------------
+\setlist[itemize]{
+  leftmargin=1.4em,
+  topsep=0.2em,
+  itemsep=0.12em,
+  parsep=0pt,
+  partopsep=0pt,
+  label=\textcolor{accent}{\small$\bullet$}
+}
+
+% ---------------- Custom Commands ----------------
+\newcommand{\Meta}[1]{{\small\color{subtext} #1}}
+\newcommand{\Info}[1]{{\small\color{subtext} #1}}
+\newcommand{\Tag}[1]{%
+  \tikz[baseline=(X.base)]\node (X) [fill=softbg, rounded corners=4pt, inner xsep=6pt, inner ysep=2.5pt] {\small\textcolor{bodytext}{#1}};
+}
+\newcommand{\Entry}[4]{%
+  \vspace{0.1em}
+  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{0.24\linewidth}@{}}
+    {\bfseries\color{titletext} #1} & {\small\color{subtext} #2} \\
+    {\color{bodytext} #3} & {\small\color{subtext} #4}
+  \end{tabularx}\vspace{0.05em}
+}
+\newcommand{\Project}[3]{%
+  \vspace{0.1em}
+  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{0.24\linewidth}@{}}
+    {\bfseries\color{titletext} #1} & {\small\color{subtext} #2} \\
+    \multicolumn{2}{@{}l@{}}{\Meta{#3}}
+  \end{tabularx}\vspace{0.05em}
+}
+
+\begin{document}
+\color{bodytext}
+
+% ================= Header =================
+\begin{minipage}[c]{0.18\textwidth}
+  \centering
+  
+  \IfFileExists{jy.jpg}{%
+    \begin{tikzpicture}
+      \clip (0,0) circle (1.45cm);
+      \node at (0,0) {\includegraphics[width=2.9cm,height=2.9cm]{jy.jpg}};
+      \draw[line width=1.0pt,color=accent!45] (0,0) circle (1.45cm);
+    \end{tikzpicture}
+  }{%
+    \begin{tikzpicture}
+      \node[fill=softbg, draw=accent!40, circle, minimum size=2.9cm] {\large\bfseries\color{accentdark} 蒋玥};
+    \end{tikzpicture}
+  }
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\textwidth}
+  {\fontsize{25}{28}\selectfont\bfseries\color{titletext} 蒋玥}\\[0.25em]
+  {\normalsize\color{accentdark} 浙江大学 \quad|\quad 计算机科学与技术 \quad|\quad 2024.09 -- 2028.06}\\[0.4em]
+  \Meta{邮箱：\href{mailto:3240103533@zju.edu.cn}{3240103533@zju.edu.cn} \quad|\quad 电话：198-8329-6387}\\[0.35em]
+  \Meta{求职方向：后端开发 \quad|\quad C / MySQL /  数据结构与算法}
+\end{minipage}
+
+\vspace{0.6em}
+{\color{accent!70}\rule{\linewidth}{1.1pt}}
+
+% ================= Skills =================
+\section*{专业技能}
+\Tag{编程语言：C/C++（熟悉）、Python} \hspace{0.4em}
+\Tag{数据库：MySQL（InnoDB）} \hspace{0.4em}
+\Tag{工具：Maven、Git、Vivado}
+
+\vspace{0.4em}
+\begin{itemize}
+  \item 熟悉 \textbf{C/C++}，理解面向对象设计（多态、运算符重载等）。
+  \item 掌握 \textbf{链表、栈、队列、树、图、堆、排序、最短路径} 等数据结构与算法，能熟练实现递归等常见算法。
+  \item 熟悉 \textbf{MySQL} 数据库设计与事务管理，掌握索引优化、行级锁、隔离级别等并发控制机制。
+  \item 具备系统设计思维，完成五级流水线 CPU、Cache、异常/中断子系统等底层系统项目。
+\end{itemize}
+
+% ================= Projects =================
+\section{项目经历}
+
+\Project{图书管理系统}{2026}{Java / MySQL \quad | \quad 前后端分离、事务管理、并发控制}
+\begin{itemize}[leftmargin=*]
+    \item 基于 \textbf{Java + MySQL} 实现图书管理系统，涵盖图书入库/查询/借还书/借书证管理共 \textbf{12 个功能模块}，采用分层架构。
+    \item 使用 \textbf{SELECT ... FOR UPDATE} 行级排他锁解决并发借书超卖问题，\textbf{16 线程}压力测试仅 1 个事务成功，验证并发正确性。
+    \item 全部 SQL 使用 PreparedStatement 参数绑定防止 SQL 注入；支持动态多条件查询与 \textbf{addBatch 批量入库}。
+\end{itemize}
+
+\Project{最短路径算法性能比较}{2025}{C \quad | \quad Dijkstra、Binary Heap}
+\begin{itemize}[leftmargin=*]
+    \item 基于 C 语言实现 Dijkstra 算法，分别使用 \textbf{Array} 与 \textbf{Binary Heap} 两种优先队列，构建多规模随机图（1k--10k 顶点）进行性能测试，Binary Heap 实现效率提升约 \textbf{1.8--2.15 倍}。
+\end{itemize}
+
+\Project{RISC-V 五级流水线 CPU（含异常/中断与 Cache）}{2025--2026}{Verilog \quad | \quad 流水线、异常处理、Cache、FPGA}
+\begin{itemize}[leftmargin=*]
+    \item 基于 Verilog 实现五级流水线 CPU，扩展 \textbf{Machine-mode 异常/中断子系统}（4 个 CSR、三态 FSM、精确异常），支持 ecall、非法指令、访问越界及外部中断。
+    \item 设计 \textbf{2 路组相联 write-back Cache}（伪 LRU 替换、脏行回写），支持 LB/LH/LW 多粒度访问，FPGA 上板验证通过。
+\end{itemize}
+
+\Project{C++ 面向对象工程实践（系列）}{2026}{C++ \quad | \quad 多态、内存管理、运算符重载、设计模式}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{自动微分引擎}：多态继承构建计算图（Node $\to$ Add/Mul/Sin 等），实现 forward/backward 反向传播求梯度；Memory Arena 管理生命周期，运算符重载（Hidden Friends/ADL）提供数学语法接口。
+    \item \textbf{线性代数库}：实现 Vector/Matrix 类（Rule of Three 深拷贝），运算符重载支持矩阵运算；抽象 LinearSolver 接口 + 高斯消元求解器（Partial Pivoting）。
+\end{itemize}
+
+% ================= Other =================
+\section*{其他信息}
+\begin{itemize}[leftmargin=*]
+    \item 核心课程：数据结构基础、高级数据结构与算法、数据库系统、计算机组成原理、计算机体系结构、操作系统、计算机网络、面向对象程序设计、概率论与数理统计等
+\end{itemize}
+
+\vspace{-0.2em}
+\Project{科研训练}{2025-至今}{大模型 / 神经拟态 / 存算架构}
+\begin{itemize}[leftmargin=*]
+    \item 在导师指导下参与类脑计算与大模型硬件协同方向的科研训练。已成功申请立项国家级创新创业项目。
+\end{itemize}
+
+\vspace{-0.2em}
+\Project{校园经历}{2025-至今}{团委青志部 副部长 \quad | \quad 组织策划、团队协同、志愿服务}
+
+\end{document}
