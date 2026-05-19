@@ -74,7 +74,9 @@
       "projectEnabled": true,
       "capabilities": [
         "vision"
-      ]
+      ],
+      "maxTokens": 28800,
+      "temperature": 0.47
     },
     {
       "name": "gpt-5.4",
@@ -417,7 +419,7 @@
   "defaultConversationNoteName": "{$topic}@{$date}_{$time}",
   "inlineEditCommands": [],
   "projectList": [],
-  "lastDismissedVersion": null,
+  "lastDismissedVersion": "3.3.2",
   "passMarkdownImages": true,
   "enableAutonomousAgent": true,
   "enableCustomPromptTemplating": true,
