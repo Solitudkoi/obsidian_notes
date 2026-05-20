@@ -1,14 +1,53 @@
-实验文档：
+### 主要待完成模块
 
-https://www.yuque.com/yingchengjun/minisql
+- buffer
+    - [buffer_pool_manager.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [lru_replacer.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [concurrency](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [lock_manager.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [catalog](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [catalog.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [indexes.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [table.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [record](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [row.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [schema.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [column.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [index](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [b_plus_tree.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [index_iterator.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [page](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [bitmap_page.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [b_plus_tree_page.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [b_plus_tree_internal_page.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [b_plus_tree_leaf_page.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [executor](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [execute_engine.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [storage](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [disk_manager.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [table_heap.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [table_iterator.cpp](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+- [recovery](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    
+    - [recovery_manager.h](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+    - [log_rec.h](vscode-file://vscode-app/e:/Microsoft%20VS%20Code/Microsoft%20VS%20Code/f6cfa2ea24/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
 
-每组仅需一位同学提交代码压缩包和小组总体设计报告；
+### 说明
 
-其他同学仅需提交个人详细设计报告
+> 以上文件中都有“TODO: Student Implement”标记，说明这些部分仍需完成实现。
 
-**2024年5月31日：修复了框架的一些问题，请大家重新拉取代码**
+如果你想，我可以继续帮你按模块进一步拆分每个文件里的具体待完成函数。
 
-### 框架链接：[ZJU GitLab链接，请使用内网访问](https://git.zju.edu.cn/zjucsdb/minisql)
+- 
+
+Raptor mini (Preview) • 1x
 
 ### 一、实验目的
 
