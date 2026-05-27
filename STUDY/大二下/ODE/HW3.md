@@ -1,0 +1,291 @@
+# 习题一（pp.58-59）
+
+## 第49题
+
+$xy'' + y' = 4x$
+
+**不显含 $y$，令 $p = y'$：**
+
+$$xp' + p = 4x$$
+
+$$p' + \frac{1}{x}p = 4$$
+
+一阶线性方程，积分因子 $\mu = e^{\int \frac{1}{x}dx} = x$（在 $x>0$ 或 $x<0$ 上）：
+
+$$d(xp) = 4x,dx$$
+
+$$xp = 2x^2 + C_1$$
+
+$$p = y' = 2x + \frac{C_1}{x}$$
+
+再积分：
+
+$$\boxed{y = x^2 + C_1\ln|x| + C_2}$$
+
+---
+
+## 第51题
+
+$yy'' - (y')^2 = y^4$，$y(0)=1$，$y'(0)=0$
+
+**不显含 $x$，令 $p = y'$，$y'' = p\dfrac{dp}{dy}$：**
+
+$$yp\frac{dp}{dy} - p^2 = y^4$$
+
+这是关于 $p$ 的伯努利方程。令 $z = p^2$，则 $\frac{dz}{dy} = 2p\frac{dp}{dy}$：
+
+$$\frac{y}{2}\frac{dz}{dy} - z = y^4$$
+
+$$\frac{dz}{dy} - \frac{2}{y}z = 2y^3$$
+
+积分因子 $\mu = e^{-\int \frac{2}{y}dy} = \frac{1}{y^2}$：
+
+$$d!\left(\frac{z}{y^2}\right) = 2y,dy$$
+
+$$\frac{z}{y^2} = y^2 + C_1$$
+
+$$p^2 = y^4 + C_1 y^2$$
+
+代入 $y(0)=1, y'(0)=0$：$0 = 1 + C_1$，故 $C_1 = -1$。
+
+$$p^2 = y^4 - y^2 = y^2(y^2-1)$$
+
+$$(y')^2 = y^2(y^2 - 1)$$
+
+由初值 $y(0)=1$ 且 $y'(0)=0$，在 $x=0$ 附近 $y \approx 1$。分离变量：
+
+$$\frac{dy}{y\sqrt{y^2-1}} = \pm dx$$
+
+注意 $\int \frac{dy}{y\sqrt{y^2-1}} = \text{arcsec}|y| = \arccos\frac{1}{y}$（当 $y \geq 1$）。
+
+$$\arccos\frac{1}{y} = \pm x + C_2$$
+
+代入 $y(0)=1$：$\arccos 1 = C_2$，故 $C_2 = 0$。
+
+$$\frac{1}{y} = \cos x$$
+
+$$\boxed{y = \sec x}$$
+
+验证：$y' = \sec x\tan x$，$y(0)=1$ ✓，$y'(0)=0$ ✓。
+
+---
+
+## 第53题
+
+$2y'' = 3y^2$，$y(-2)=1$，$y'(-2)=1$
+
+**不显含 $x$，令 $p = y'$，$y'' = p\dfrac{dp}{dy}$：**
+
+$$2p\frac{dp}{dy} = 3y^2$$
+
+分离变量：
+
+$$2p,dp = 3y^2,dy$$
+
+$$p^2 = y^3 + C_1$$
+
+代入初值：$y(-2)=1, y'(-2)=1$，所以 $1 = 1 + C_1$，$C_1 = 0$。
+
+$$p^2 = y^3 \implies y' = \pm y^{3/2}$$
+
+由 $y(-2)=1>0$，$y'(-2)=1>0$，取正号：
+
+$$y' = y^{3/2}$$
+
+分离变量：
+
+$$y^{-3/2}dy = dx$$
+
+$$-2y^{-1/2} = x + C_2$$
+
+代入 $y(-2)=1$：$-2 = -2 + C_2$，故 $C_2 = 0$。
+
+$$-2y^{-1/2} = x \implies y^{-1/2} = -\frac{x}{2}$$
+
+$$\boxed{y = \frac{4}{x^2}}$$
+
+（定义域 $x < 0$，与初值点 $x=-2$ 一致。）
+
+---
+
+## 第54题
+
+$y''(1-y) + 2(y')^2 = 0$
+
+**不显含 $x$，令 $p = y'$，$y'' = p\dfrac{dp}{dy}$：**
+
+$$p\frac{dp}{dy}(1-y) + 2p^2 = 0$$
+
+若 $p \neq 0$，两边除以 $p$：
+
+$$\frac{dp}{dy}(1-y) + 2p = 0$$
+
+$$\frac{dp}{dy} = \frac{-2p}{1-y} = \frac{2p}{y-1}$$
+
+分离变量：
+
+$$\frac{dp}{p} = \frac{2,dy}{y-1}$$
+
+$$\ln|p| = 2\ln|y-1| + C$$
+
+$$p = C_1(y-1)^2$$
+
+即 $\dfrac{dy}{dx} = C_1(y-1)^2$，再分离变量：
+
+$$\frac{dy}{(y-1)^2} = C_1,dx$$
+
+$$-\frac{1}{y-1} = C_1 x + C_2$$
+
+$$\boxed{\frac{1}{y-1} = -(C_1 x + C_2)}$$
+
+即 $y = 1 - \dfrac{1}{C_1 x + C_2}$。另外 $p=0$ 即 $y = C$（常数）也是解。
+
+---
+
+## 第56题
+
+$xy'' = y'\ln\dfrac{y'}{x}$
+
+**不显含 $y$，令 $p = y'$：**
+
+$$xp' = p\ln\frac{p}{x}$$
+
+令 $v = \dfrac{p}{x}$，则 $p = vx$，$p' = v + xv'$：
+
+$$x(v + xv') = vx\ln v$$
+
+$$v + xv' = v\ln v$$
+
+$$xv' = v\ln v - v = v(\ln v - 1)$$
+
+分离变量：
+
+$$\frac{dv}{v(\ln v - 1)} = \frac{dx}{x}$$
+
+令 $t = \ln v - 1$，则 $dt = \frac{dv}{v}$：
+
+$$\frac{dt}{t} = \frac{dx}{x}$$
+
+$$\ln|t| = \ln|x| + C$$
+
+$$t = C_1 x$$
+
+回代 $t = \ln v - 1$：
+
+$$\ln v = 1 + C_1 x$$
+
+$$v = e^{1+C_1 x}$$
+
+回代 $p = vx$：
+
+$$y' = xe^{1+C_1 x}$$
+
+积分：
+
+$$y = \int xe^{1+C_1 x},dx = e\int xe^{C_1 x},dx$$
+
+$$= e\left[\frac{x}{C_1}e^{C_1 x} - \frac{1}{C_1^2}e^{C_1 x}\right] + C_2$$
+
+$$\boxed{y = e^{1+C_1 x}!\left(\frac{x}{C_1} - \frac{1}{C_1^2}\right) + C_2}$$
+
+---
+
+# 习题二（pp.113）
+
+## 第2题
+
+证明：设 $f_1(x),\dots,f_k(x)$ 在 $(a,b)$ 内线性无关，则由这些函数构造的 $k$ 个新函数 $g_i(x) = \sum_{j=1}^k a_{ij}f_j(x)$（$i=1,\dots,k$）在 $(a,b)$ 内也线性无关的充要条件是系数行列式 $\det(a_{ij}) \neq 0$。
+
+**证明：**
+
+设 $\mathbf{g} = A\mathbf{f}$，其中 $A = (a_{ij})_{k\times k}$，$\mathbf{f} = (f_1,\dots,f_k)^T$，$\mathbf{g} = (g_1,\dots,g_k)^T$。
+
+**必要性（$g_i$ 线性无关 $\Rightarrow$ $\det A \neq 0$）：**
+
+反证。若 $\det A = 0$，则存在不全为零的 $c_1,\dots,c_k$ 使得 $\sum_i c_i \mathbf{a}_i = \mathbf{0}$（$\mathbf{a}_i$ 是 $A$ 的第 $i$ 行）。那么：
+
+$$\sum_{i=1}^k c_i g_i(x) = \sum_{i=1}^k c_i \sum_{j=1}^k a_{ij}f_j(x) = \sum_{j=1}^k \left(\sum_{i=1}^k c_i a_{ij}\right)f_j(x) = 0$$
+
+因为 $\sum_i c_i a_{ij} = 0$ 对每个 $j$ 成立。这说明 $g_i$ 线性相关，矛盾。
+
+**充分性（$\det A \neq 0$ $\Rightarrow$ $g_i$ 线性无关）：**
+
+设 $\sum_{i=1}^k c_i g_i(x) \equiv 0$，即：
+
+$$\sum_{j=1}^k \left(\sum_{i=1}^k c_i a_{ij}\right)f_j(x) \equiv 0$$
+
+因为 $f_1,\dots,f_k$ 线性无关，所以 $\sum_{i=1}^k c_i a_{ij} = 0$ 对所有 $j$ 成立。
+
+写成矩阵形式：$\mathbf{c}^T A = \mathbf{0}^T$，即 $A^T \mathbf{c} = \mathbf{0}$。
+
+因为 $\det A \neq 0$，所以 $\det A^T \neq 0$，故 $\mathbf{c} = \mathbf{0}$。
+
+因此 $g_1,\dots,g_k$ 线性无关。$\blacksquare$
+
+---
+
+## 第4题
+
+设 $y_i$（$i=1,\dots,n+1$）是 $n$ 阶非齐次线性方程 $L[y] = f(x)$ 的 $n+1$ 个线性无关的解，试求对应齐次方程 $L[y]=0$ 的基本解组，并求 $L[y]=f(x)$ 的通解。
+
+**解：**
+
+因为 $L[y_i] = f(x)$ 对每个 $i$ 成立，所以对任意两个解的差：
+
+$$L[y_i - y_{n+1}] = L[y_i] - L[y_{n+1}] = f(x) - f(x) = 0$$
+
+所以 $\eta_i = y_i - y_{n+1}$（$i = 1,\dots,n$）都是齐次方程的解。
+
+**证明 $\eta_1,\dots,\eta_n$ 线性无关：**
+
+若 $\sum_{i=1}^n c_i \eta_i \equiv 0$，即：
+
+$$\sum_{i=1}^n c_i(y_i - y_{n+1}) \equiv 0$$
+
+$$\sum_{i=1}^n c_i y_i - \left(\sum_{i=1}^n c_i\right) y_{n+1} \equiv 0$$
+
+因为 $y_1,\dots,y_{n+1}$ 线性无关，所以 $c_1 = c_2 = \cdots = c_n = 0$ 且 $\sum c_i = 0$，这给出所有 $c_i = 0$。
+
+因此 $\eta_1,\dots,\eta_n$ 构成齐次方程的**基本解组**。
+
+**通解：** 取 $y_{n+1}$ 作为非齐次方程的一个特解，则：
+
+$$\boxed{y = C_1(y_1 - y_{n+1}) + C_2(y_2 - y_{n+1}) + \cdots + C_n(y_n - y_{n+1}) + y_{n+1}}$$
+
+---
+
+## 第5题
+
+设 $y_1(x),\dots,y_n(x)$ 是齐次方程 $y^{(n)} + p_1(x)y^{(n-1)} + \cdots + p_n(x)y = 0$ 的基本解组，$W(x)$ 是其朗斯基行列式。证明刘维尔公式：
+
+$$W(x) = W(x_0)\exp!\left[-\int_{x_0}^x p_1(\xi),d\xi\right]$$
+
+**证明：**
+
+$W(x)$ 是 $n\times n$ 行列式，第 $i$ 行是 $(y_1^{(i-1)}, y_2^{(i-1)}, \dots, y_n^{(i-1)})$。
+
+对 $W(x)$ 求导，根据行列式求导法则（逐行求导）：
+
+$$W'(x) = \sum_{i=1}^n W_i(x)$$
+
+其中 $W_i$ 是将第 $i$ 行求导、其余行不变的行列式。
+
+当对第 $i$ 行（$i < n$）求导时，第 $i$ 行变成 $(y_1^{(i)}, \dots, y_n^{(i)})$，这恰好与第 $i+1$ 行相同，所以 $W_i = 0$（两行相同，行列式为零）。
+
+**唯一非零项是 $W_n$：** 对最后一行（第 $n$ 行）求导，$(y_1^{(n-1)},\dots,y_n^{(n-1)})$ 变成 $(y_1^{(n)},\dots,y_n^{(n)})$。
+
+由方程 $y_j^{(n)} = -p_1 y_j^{(n-1)} - p_2 y_j^{(n-2)} - \cdots - p_n y_j$，代入：
+
+$$W' = \begin{vmatrix} y_1 & \cdots & y_n \ y_1' & \cdots & y_n' \ \vdots & & \vdots \ y_1^{(n-2)} & \cdots & y_n^{(n-2)} \ y_1^{(n)} & \cdots & y_n^{(n)} \end{vmatrix}$$
+
+将最后一行 $y_j^{(n)} = -p_1 y_j^{(n-1)} - p_2 y_j^{(n-2)} - \cdots - p_n y_j$ 代入。
+
+利用行列式的行线性性，最后一行分拆为 $n$ 项。其中含 $-p_2 y_j^{(n-2)}$ 的那项与第 $n-1$ 行相同，行列式为零；含 $-p_3 y_j^{(n-3)}$ 的与第 $n-2$ 行相同，也为零……以此类推，只有含 $-p_1 y_j^{(n-1)}$ 的项不与其他行重复。
+
+因此：
+
+$$W'(x) = -p_1(x) \cdot W(x)$$
+
+这是关于 $W$ 的一阶线性方程，解为：
+
+$$W(x) = W(x_0)\exp!\left[-\int_{x_0}^x p_1(\xi),d\xi\right] \qquad \blacksquare$$
