@@ -231,7 +231,7 @@ $$\sum_{j=1}^k \left(\sum_{i=1}^k c_i a_{ij}\right)f_j(x) \equiv 0$$
 **解：**
 
 因为 $L[y_i] = f(x)$ 对每个 $i$ 成立，所以对任意两个解的差：
-
+ 
 $$L[y_i - y_{n+1}] = L[y_i] - L[y_{n+1}] = f(x) - f(x) = 0$$
 
 所以 $\eta_i = y_i - y_{n+1}$（$i = 1,\dots,n$）都是齐次方程的解。
