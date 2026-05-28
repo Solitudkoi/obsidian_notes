@@ -433,7 +433,352 @@ $$\xrightarrow{\text{为什么}W\text{这么好用？}} \text{刘维尔公式：
 
 
 ![[Pasted image 20260528205721.png]]
+# 2025年3月13日 常微分方程试题解答
+
+## 第1题
+
+$$\frac{dy}{dx} + y\tan x = \sin 2x, \quad x \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$$
+
+一阶线性方程，$p(x) = \tan x$，$f(x) = \sin 2x = 2\sin x\cos x$。
+
+积分因子 $\mu = e^{\int \tan x,dx} = e^{-\ln\cos x} = \frac{1}{\cos x} = \sec x$
+
+（在 $(-\frac{\pi}{2},\frac{\pi}{2})$ 上 $\cos x > 0$，无绝对值问题。）
+
+$$d(y\sec x) = \sec x \cdot 2\sin x\cos x,dx = 2\sin x,dx$$
+
+$$y\sec x = -2\cos x + C$$
+
+$$\boxed{y = -2\cos^2 x + C\cos x}$$
+
+可以也写成 $y = -(1+\cos 2x) + C\cos x$。
+
+---
+
+## 第2题
+
+$$\frac{dy}{dx} = e^{x+y} + e^{x-y}$$
+
+$$y' = e^x e^y + e^x e^{-y} = e^x(e^y + e^{-y})$$
+
+这是**可分离变量方程**：
+
+$$\frac{dy}{e^y + e^{-y}} = e^x,dx$$
+
+左边：$e^y + e^{-y} = 2\cosh y$，所以：
+
+$$\frac{dy}{2\cosh y} = \frac{e^y,dy}{e^{2y}+1}$$
+
+（分子分母同乘 $e^y$）
+
+令 $t = e^y$，$dt = e^y,dy$：
+
+$$\int \frac{dt}{t^2+1} = \arctan t = \arctan(e^y)$$
+
+右边：
+
+$$\int e^x,dx = e^x + C$$
+
+所以：
+
+$$\boxed{\arctan(e^y) = e^x + C}$$
+
+---
+
+## 第3题
+
+$$y' + y\tan x = y^3\sec x$$
+
+**伯努利方程**，$n = 3$。
+
+两边除以 $y^3$（设 $y \neq 0$）：
+
+$$y^{-3}y' + y^{-2}\tan x = \sec x$$
+
+令 $z = y^{-2}$，$z' = -2y^{-3}y'$，所以 $y^{-3}y' = -\frac{1}{2}z'$：
+
+$$-\frac{1}{2}z' + z\tan x = \sec x$$
+
+$$z' - 2z\tan x = -2\sec x$$
+
+一阶线性方程，积分因子 $\mu = e^{-\int 2\tan x,dx} = e^{2\ln\cos x} = \cos^2 x$：
+
+$$d(z\cos^2 x) = -2\sec x \cdot \cos^2 x,dx = -2\cos x,dx$$
+
+$$z\cos^2 x = -2\sin x + C$$
+
+回代 $z = y^{-2}$：
+
+$$\frac{\cos^2 x}{y^2} = -2\sin x + C$$
+
+$$\boxed{\frac{\cos^2 x}{y^2} = C - 2\sin x}$$
+
+另外 $y \equiv 0$ 也是解（代入原方程：$0 + 0 = 0$ ✓）。
+
+---
+
+## 第4题
+
+$$y'' = y'e^y, \quad y(0) = 0,; y'(0) = 1$$
+
+**不显含 $x$**，令 $p = y'$，$y'' = p\dfrac{dp}{dy}$：
+
+$$p\frac{dp}{dy} = pe^y$$
+
+若 $p \neq 0$，两边除以 $p$：
+
+$$\frac{dp}{dy} = e^y$$
+
+$$p = e^y + C_1$$
+
+代入初值 $y(0)=0, y'(0)=1$，即 $y=0$ 时 $p=1$：
+
+$$1 = e^0 + C_1 = 1 + C_1 \implies C_1 = 0$$
+
+所以 $p = e^y$，即：
+
+$$\frac{dy}{dx} = e^y$$
+
+分离变量：
+
+$$e^{-y}dy = dx$$
+
+$$-e^{-y} = x + C_2$$
+
+代入 $y(0)=0$：$-1 = 0 + C_2$，$C_2 = -1$。
+
+$$-e^{-y} = x - 1$$
+
+$$e^{-y} = 1 - x$$
+
+$$\boxed{y = -\ln(1-x)}$$
+
+（定义域 $x < 1$。）
+
+---
+
+## 第5题
+
+$$y,dx - (x + y^2\cos y),dy = 0$$
+
+写成 $M,dx + N,dy = 0$ 的形式：$M = y$，$N = -(x + y^2\cos y)$。
+
+$M_y = 1$，$N_x = -1$，不相等，不是全微分。
+
+**换个思路：** 把 $x$ 看成 $y$ 的函数，改写方程：
+
+$$y\frac{dx}{dy} = x + y^2\cos y$$
+
+$$\frac{dx}{dy} - \frac{1}{y}x = y\cos y$$
+
+这是关于 $x(y)$ 的**一阶线性方程**！$p(y) = -\frac{1}{y}$，$f(y) = y\cos y$。
+
+积分因子 $\mu = e^{\int -\frac{1}{y}dy} = e^{-\ln|y|} = \frac{1}{y}$（取 $y > 0$）：
+
+$$d!\left(\frac{x}{y}\right) = \cos y,dy$$
+
+$$\frac{x}{y} = \sin y + C$$
+
+$$\boxed{x = y\sin y + Cy}$$
+
 ![[Pasted image 20260528205731.png]]
+
+# 期中小测解答
+
+## 第1题
+
+$xy' + y - x^2y^2 = 0$
+
+改写：$y' + \dfrac{1}{x}y = xy^2$
+
+**伯努利方程**，$n=2$。两边除以 $y^2$（设 $y \neq 0$）：
+
+$$y^{-2}y' + \frac{1}{x}y^{-1} = x$$
+
+令 $z = y^{-1}$，$z' = -y^{-2}y'$：
+
+$$-z' + \frac{1}{x}z = x$$
+
+$$z' - \frac{1}{x}z = -x$$
+
+积分因子 $\mu = e^{-\int \frac{1}{x}dx} = \frac{1}{x}$：
+
+$$d!\left(\frac{z}{x}\right) = -dx$$
+
+$$\frac{z}{x} = -x + C$$
+
+回代 $z = \frac{1}{y}$：
+
+$$\frac{1}{xy} = C - x$$
+
+$$\boxed{y = \frac{1}{x(C - x)}}$$
+
+另外 $y \equiv 0$ 也是解。
+
+---
+
+## 第2题
+
+$xy,dy - (x^2 + y^2),dx = 0$，$y(1) = 0$
+
+改写：
+
+$$xy,dy = (x^2 + y^2),dx$$
+
+$$\frac{dy}{dx} = \frac{x^2 + y^2}{xy} = \frac{x}{y} + \frac{y}{x}$$
+
+**齐次方程**，令 $u = \dfrac{y}{x}$，$y = ux$，$y' = u + xu'$：
+
+$$u + xu' = \frac{1}{u} + u$$
+
+$$xu' = \frac{1}{u}$$
+
+分离变量：
+
+$$u,du = \frac{dx}{x}$$
+
+$$\frac{u^2}{2} = \ln|x| + C$$
+
+回代 $u = \frac{y}{x}$：
+
+$$\frac{y^2}{2x^2} = \ln|x| + C$$
+
+代入 $y(1) = 0$：$0 = 0 + C$，$C = 0$。
+
+$$\frac{y^2}{2x^2} = \ln|x|$$
+
+$$\boxed{y^2 = 2x^2\ln|x|}$$
+
+---
+
+## 第3题
+
+$y''(1-y) = y'(1+y')$
+
+**不显含 $x$**，令 $p = y'$，$y'' = p\dfrac{dp}{dy}$：
+
+$$p\frac{dp}{dy}(1-y) = p(1+p)$$
+
+若 $p \neq 0$，两边除以 $p$：
+
+$$\frac{dp}{dy}(1-y) = 1 + p$$
+
+$$\frac{dp}{dy} = \frac{1+p}{1-y}$$
+
+分离变量：
+
+$$\frac{dp}{1+p} = \frac{dy}{1-y}$$
+
+$$\ln|1+p| = -\ln|1-y| + C$$
+
+$$|1+p| = \frac{A}{|1-y|}$$
+
+即：
+
+$$1 + p = \frac{C_1}{1-y}$$
+
+$$p = \frac{C_1}{1-y} - 1 = \frac{C_1 - 1 + y}{1-y}$$
+
+即 $\dfrac{dy}{dx} = \dfrac{C_1 - 1 + y}{1 - y}$，分离变量：
+
+$$\frac{(1-y),dy}{C_1 - 1 + y} = dx$$
+
+令 $a = C_1 - 1$，分子改写 $1 - y = (a+1) - (a+y) = (a+1) - (a+y)$：
+
+$$\frac{(1-y),dy}{a + y} = \frac{(a+1) - (a+y)}{a+y},dy = \left(\frac{a+1}{a+y} - 1\right)dy$$
+
+积分：
+
+$$(a+1)\ln|a+y| - y = x + C_2$$
+
+回代 $a = C_1 - 1$：
+
+$$\boxed{C_1\ln|C_1 - 1 + y| - y = x + C_2}$$
+
+另外 $p = 0$ 即 $y = C$（常数）也是解。
+
+---
+
+## 第4题
+
+探照灯反射镜面——截面曲线是抛物线。
+
+**建模：** 设光源在原点，反射光线沿 $x$ 轴正方向平行射出。截面曲线为 $y = y(x)$。
+
+由反射定律（入射角 = 反射角），光线从原点射到曲线上一点 $P(x,y)$，反射后平行于 $x$ 轴。
+
+设切线与 $x$ 轴夹角为 $\alpha$，向径 $OP$ 与 $x$ 轴夹角为 $\theta$。反射定律要求切线是入射光与反射光的角平分线，由几何关系：
+
+$$\tan\alpha = \frac{y}{x - x + y/\tan\alpha}$$
+
+更直接的推导：从原点到 $P(x,y)$ 的光线方向向量为 $(x,y)$，反射光方向为 $(1,0)$。法线是角平分线方向，切线垂直于法线。
+
+利用半角关系，设 $\tan\frac{\theta}{2}$ 其中 $\theta$ 是向径与 $x$ 轴的夹角，可以得到：
+
+$$y' = \frac{y}{x + \sqrt{x^2+y^2}}$$
+
+**或者用更简洁的方法：** 设焦点在原点，反射光平行于 $x$ 轴。对曲线上点 $(x,y)$，切线与 $x$ 轴夹角为 $\alpha = \arctan y'$。由反射几何：
+
+$$\tan\alpha = \frac{y}{x}\cdot\frac{1}{1-\frac{y'y}{x}} \quad \text{(复杂)}$$
+
+**用极坐标更清晰。** 设 $r, \theta$ 为极坐标，焦点在原点，反射光平行极轴。
+
+反射条件：曲线在每一点的切线与向径的夹角等于切线与平行于极轴方向的夹角，即 $\psi = \frac{\pi - \theta}{2}$（其中 $\psi$ 是切线与向径的夹角）。
+
+由公式 $\tan\psi = \frac{r}{dr/d\theta}$：
+
+$$\frac{r}{r'} = \tan\frac{\pi-\theta}{2} = \cot\frac{\theta}{2} = \frac{\cos(\theta/2)}{\sin(\theta/2)}$$
+
+分离变量：
+
+$$\frac{dr}{r} = \frac{\sin(\theta/2)}{\cos(\theta/2)}d\theta$$
+
+$$\ln r = -2\ln\cos\frac{\theta}{2} + C$$
+
+$$r = \frac{a}{\cos^2(\theta/2)} = \frac{2a}{1+\cos\theta}$$
+
+这正是以原点为焦点、开口向右的**抛物线**的极坐标方程。
+
+转化为直角坐标（焦点在原点，准线 $x = -a$）：
+
+$$\boxed{y^2 = 4a(x + a), \quad a > 0}$$
+
+即截面曲线为**抛物线**。
+
+---
+
+## 第5题
+
+试证：任意一个 $n$ 阶线性方程最多有 $n+1$ 个线性无关解。
+
+**题意澄清：** 这里的"线性无关解"是指非齐次方程 $L[y] = f(x)$（$f \not\equiv 0$）的解。
+
+**证明：**
+
+设 $n$ 阶线性方程 $L[y] = f(x)$，$y_1, y_2, \dots, y_{n+2}$ 是它的 $n+2$ 个解。要证它们必线性相关。
+
+作差：令 $\eta_i = y_{i+1} - y_1$，$i = 1, 2, \dots, n+1$。
+
+则 $L[\eta_i] = L[y_{i+1}] - L[y_1] = f - f = 0$，所以 $\eta_1, \dots, \eta_{n+1}$ 都是**齐次方程** $L[y]=0$ 的解。
+
+齐次方程的解空间是 $n$ 维的，因此 $n+1$ 个齐次解 $\eta_1, \dots, \eta_{n+1}$ 必线性相关，即存在不全为零的 $c_1, \dots, c_{n+1}$ 使得：
+
+$$\sum_{i=1}^{n+1} c_i \eta_i \equiv 0$$
+
+$$\sum_{i=1}^{n+1} c_i(y_{i+1} - y_1) \equiv 0$$
+
+$$\sum_{i=1}^{n+1} c_i y_{i+1} - \left(\sum_{i=1}^{n+1} c_i\right)y_1 \equiv 0$$
+
+令 $c_0 = -\sum_{i=1}^{n+1} c_i$，则：
+
+$$c_0 y_1 + c_1 y_2 + c_2 y_3 + \cdots + c_{n+1} y_{n+2} \equiv 0$$
+
+其中 $c_1, \dots, c_{n+1}$ 不全为零，所以 $c_0, c_1, \dots, c_{n+1}$ 也不全为零。
+
+因此 $y_1, y_2, \dots, y_{n+2}$ 线性相关。
+
+这说明非齐次方程不可能有 $n+2$ 个线性无关的解，即**最多有 $n+1$ 个线性无关解**。 $\blacksquare$
+
 ![[Pasted image 20260528205742.png]]
 ![[Pasted image 20260528205755.png]]
 ![[Pasted image 20260528205800.png]]
