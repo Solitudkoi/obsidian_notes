@@ -781,7 +781,6 @@ $$c_0 y_1 + c_1 y_2 + c_2 y_3 + \cdots + c_{n+1} y_{n+2} \equiv 0$$
 
 ![[Pasted image 20260528205742.png]]
 ![[Pasted image 20260528205755.png]]
-![[Pasted image 20260528205800.png]]
 ![[Pasted image 20260528205807.png]]
 第一题：分开积分即可 
 
