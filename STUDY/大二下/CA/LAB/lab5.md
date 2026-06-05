@@ -1,3 +1,5 @@
+![[arch_lab5.png]]
+![[figure1_lab5.png]]
 ![[figure2_lab5.png]]
 
 ![[figure3_lab5.png]]
@@ -18,6 +20,5 @@
 
 ![[figure11_lab5.png]]
 
-![[arch_lab5.png]]
 
-![[figure1_lab5.png]]
+
