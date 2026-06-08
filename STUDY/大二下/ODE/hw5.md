@@ -4,26 +4,19 @@
 
 ## 第26题
 
-$$\frac{d^2x}{dt^2} + x = \cos 2t,\quad x\big|_{t=0}=0,\quad \frac{dx}{dt}\bigg|_{t=0}=-2$$
+$$\frac{d^2x}{dt^2} + x = \cos 2t,\quad x(0)=-2,\quad x'(0)=-2$$
 
-**特征方程：** $r^2+1=0$，$r=\pm i$
+**通解不变：** $x = C_1\cos t + C_2\sin t - \dfrac{1}{3}\cos 2t$
 
-**齐次通解：** $x_h = C_1\cos t + C_2\sin t$
+**代入初始条件：**
 
-**求特解：** 由于 $\omega=2$ 不是特征根，设 $x_p = A\cos 2t$：
+$$x(0) = C_1 - \tfrac{1}{3} = -2 \implies C_1 = -\tfrac{5}{3}$$
 
-$$x_p''+x_p = -4A\cos 2t + A\cos 2t = -3A\cos 2t = \cos 2t \implies A=-\tfrac{1}{3}$$
+$$x'(t) = -C_1\sin t + C_2\cos t + \tfrac{2}{3}\sin 2t$$
 
-**通解：** $x = C_1\cos t + C_2\sin t - \tfrac{1}{3}\cos 2t$
+$$x'(0) = C_2 = -2$$
 
-**代入初始条件（取 $x(0)=0$）：**
-
-$$x(0)=C_1 - \tfrac{1}{3}=0 \implies C_1=\tfrac{1}{3}$$
-
-$$x'(t)=-C_1\sin t + C_2\cos t + \tfrac{2}{3}\sin 2t,\quad x'(0)=C_2=-2$$
-
-$$\boxed{x = \tfrac{1}{3}\cos t - 2\sin t - \tfrac{1}{3}\cos 2t}$$
-
+$$\boxed{x = -\dfrac{5}{3}\cos t - 2\sin t - \dfrac{1}{3}\cos 2t}$$
 ---
 
 ## 第31题
