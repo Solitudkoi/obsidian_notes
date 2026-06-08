@@ -275,3 +275,4 @@ $$y_p = -\cos x\cdot\tan^2 x + \sin x\cdot 2\tan x = -\frac{\sin^2 x}{\cos x}+\f
 其中 $-\cos x$ 并入 $C_1\cos x$：
 
 $$\boxed{y = C_1\cos x + C_2\sin x + \sec x}$$
+
