@@ -248,7 +248,7 @@ $$y^* = \int_{x_0}^{x}\frac{y_1(\xi)y_2(x)-y_2(\xi)y_1(x)}{W(\xi)}f(\xi),d\xi$$
 
 ## 第60题
 
-$$y''+y=2\sec^3 x$$
+$$y''+y=2\sec^3 x$$ 
 
 **齐次通解：** $y_h=C_1\cos x+C_2\sin x$
 
