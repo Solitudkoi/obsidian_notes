@@ -12,6 +12,29 @@ git clone https://3240103533:hrjg8f2GhJnV1YngDKeQYm86MQp1OjN1dwk.01.0z0vmm5hv@gi
 
 **2024年5月31日：修复了框架的一些问题，请大家重新拉取代码**
 
+
+
+```
+
+cd ~/minisql/build
+make b_plus_tree_test && ./test/b_plus_tree_test
+make index_iterator_test && ./test/index_iterator_test
+make b_plus_tree_index_test && ./test/b_plus_tree_index_test
+
+cd ~/minisql/build
+make table_heap_test && ./test/table_heap_test
+make tuple_test && ./test/tuple_test
+
+```
+
+
+
+
+
+
+
+
+
 ### 框架链接：[ZJU GitLab链接，请使用内网访问](https://git.zju.edu.cn/zjucsdb/minisql)
 
 ### 一、实验目的
