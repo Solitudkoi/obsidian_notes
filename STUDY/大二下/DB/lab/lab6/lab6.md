@@ -25,6 +25,40 @@ cd ~/minisql/build
 make table_heap_test && ./test/table_heap_test
 make tuple_test && ./test/tuple_test
 
+cd ~/minisql/build
+make disk_manager_test && ./test/disk_manager_test
+make lru_replacer_test && ./test/lru_replacer_test
+make buffer_pool_manager_test && ./test/buffer_pool_manager_test
+make disk_manager_self_test && ./test/disk_manager_self_test
+make buffer_pool_manager_self_test && ./test/buffer_pool_manager_self_test
+
+cd ~/minisql/build
+make tuple_test && ./test/tuple_test
+make table_heap_test && ./test/table_heap_test
+make tuple_self_test && ./test/tuple_self_test
+make table_heap_self_test && ./test/table_heap_self_test
+
+cd ~/minisql/build
+make b_plus_tree_test && ./test/b_plus_tree_test
+make index_iterator_test && ./test/index_iterator_test
+make b_plus_tree_index_test && ./test/b_plus_tree_index_test
+make index_roots_page_test && ./test/index_roots_page_test
+make b_plus_tree_self_test && ./test/b_plus_tree_self_test
+
+cd ~/minisql/build
+make catalog_test && ./test/catalog_test
+make catalog_self_test && ./test/catalog_self_test
+
+cd ~/minisql/build
+make executor_test && ./test/executor_test
+make executor_self_test && ./test/executor_self_test
+
+cd ~/minisql/build
+make recovery_manager_test && ./test/recovery_manager_test
+make recovery_manager_self_test && ./test/recovery_manager_self_test
+
+cd ~/minisql/build
+make lock_manager_test && ./test/lock_manager_test
 ```
 
 
