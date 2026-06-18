@@ -83,6 +83,8 @@ int main() {
 ```C++
 output:IntOther
 
-throw 仍出一个值后不会直接跳回上一层的，而是将throw出的值和catch块做匹配
-test(1);--->
+throw 扔出一个值后不会直接跳回上一层的，而是将throw出的值和catch块做匹配
+但是如果一直没有找到匹配的类型就会自动跳回上一层（调用者），如果一直到最外层都没有匹配到，就会调用 `std::terminate()` 终止
+test(1);---> throw 1;---> catch (int e)符合int型---> cout << "Int";
+test(0);---> throw "Zero";---> catch (...) ---> cout << "Other";
 ```
