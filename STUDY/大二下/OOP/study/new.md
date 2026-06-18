@@ -28,6 +28,31 @@ int main() {
 ```
 ```C++
 output:BD~D~B
+virtual 函数 动态绑定
+如果改为 ~Base() { cout << "~B"; }运行结果就是BD~B
+```
 
-如果改为virtual ~Base() { cout << "~B"; }运行结果就是BD~B
+```C++
+#include <iostream>
+using namespace std;
+
+class Test {
+public:
+    static int count;
+    Test() { count++; }
+};
+
+int Test::count = 0;
+
+int main() {
+    Test t1;
+    Test t2;
+    cout << Test::count;
+    return 0;
+}
+```
+
+```C++
+ouput:2
+
 ```
