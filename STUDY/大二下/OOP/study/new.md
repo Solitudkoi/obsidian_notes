@@ -4,6 +4,18 @@
 
 
 
+What happens if an exception is thrown in a C++ program but is never caught by any `catch` block?
+A.The compiler will automatically generate a default catch block.
+B.The program ignores the exception and executes the next line.
+C.The program calls `std::terminate()` and aborts.✅
+D.The program execution resets to the beginning of the `main()` function.
+
+When a derived class inherits from a base class using `public` inheritance, the `protected` members of the base class become ________ members of the derived class.
+A.`public`
+B.`protected`✅
+C.`private`
+D.inaccessible
+
 ```C++
 #include <iostream>
 using namespace std;
@@ -120,6 +132,117 @@ p是多态变量，要构造的是Derived类，但是Derived是Base的子类，�
 ```
 - **有 `virtual`**：动态绑定，看实际对象类型（`Derived`）→ 输出 `Derived`。
 - **没有 `virtual`**：静态绑定，看指针类型（`Base*`）→ 输出 `Base`。
+
+
+
+```C++
+#include <iostream>
+using namespace std;
+
+void process(int &a, int b) {
+    a += 2; b += 2;
+}
+
+int main() {
+    int x = 5, y = 5;
+    process(x, y);
+    cout << x << " " << y << endl;
+    return 0;
+}
+```
+```C++
+output:7 5
+
+被自己蠢笑了吧。。。。。。。
+```
+
+
+
+```C++
+#include <cstring>
+#include <iostream>
+#include <stdexcept>
+using namespace std;
+
+class MyString {
+private:
+    char* m_data;
+    size_t m_size;
+public:
+    MyString(const char* str = NULL) {
+        if (@@) {
+            m_data = new char[1];
+            *m_data = '\0';
+            m_size = 0;
+        } else {
+            m_size = strlen(str);
+            m_data = @@;
+            strcpy(m_data, str);
+        }
+    }
+    
+    MyString(const MyString& other) {
+        m_size = other.m_size;
+        m_data = new char[m_size + 1];
+        @@;
+    }
+    
+    MyString& operator=(const MyString& other) {
+        if (this != @@) { 
+            delete[] m_data;
+            m_size = other.m_size;
+            m_data = new char[m_size + 1];
+            strcpy(m_data, other.m_data);
+        }
+        return @@; 
+    }
+    
+    ~MyString() {
+        @@; 
+    }
+
+    void insert(size_t pos, char c) {
+        if (@@) { 
+            @@ std::out_of_range("Position out of bounds");
+        }
+        char* newData = new char[m_size + 2];
+        strncpy(newData, m_data, pos);
+        newData[pos] = c;
+        strcpy(newData + pos + 1, m_data + pos);
+        delete[] m_data;
+        m_data = newData;
+        m_size++;
+    }
+    
+    void print() const {
+        if (m_data) cout << m_data << endl;
+    }
+};
+
+int main() {
+    try {
+        MyString s1("OOP");
+        MyString s2 = s1;
+        MyString s3;
+        s3 = s2;
+        
+        s3.insert(3, '!');
+        s3.print();
+
+        s3 = s3;
+        
+        s3.insert(10, '?'); 
+    } catch (const std::exception& e) {
+        cout << "Exception: " << e.what() << endl;
+    }
+    return 0;
+}
+```
+```C++
+output:
+
+
+```
 
 
 
