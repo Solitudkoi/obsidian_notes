@@ -267,11 +267,9 @@ private:
 public:
     SharedPtr(T* p = NULL) {
         if (p == NULL) {
-            ptr = NULL;
             ref_count = NULL;           // ①
         } else {
-            ptr = p;
-            ref_count = new int(1);     // ②
+            ref_count = new int(1);     // ② 构造函数，第一次
         }
     }
 
@@ -293,7 +291,7 @@ public:
         }
     }
 
-    T& operator*() {    //T* ptr;---> prt是指针，所以返回prt就是T*类型了
+    T& operator*() {    //T* ptr;---> prt是指针，所以返回*prt才是T类型
         return *ptr;                    // ⑦
     }
 
