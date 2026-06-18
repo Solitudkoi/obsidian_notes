@@ -269,7 +269,8 @@ public:
         if (p == NULL) {
             ref_count = NULL;           // ①
         } else {
-            ref_count = new int(1);     // ② 构造函数，第一次
+            ref_count = new int(1);     // ② 构造函数，第一次指向，肯定是1
+	        //new int(1)返回的是地址
         }
     }
 
@@ -322,6 +323,251 @@ int main() {
 ```
 ```C++
 output:Node(42) created. Value: 42. Still alive: 42. Node(42) destroyed. 
+```
 
 
+
+```C++
+// ======================== Enchanted 主题 ========================
+class EnchantedRoom : public Room {
+public:
+    // 直接调用基类构造函数，无需手动初始化 _sides
+    EnchantedRoom(int n) : Room(n) {}
+
+    // 重写 Enter（加上 override 是好习惯，但不必须）
+    void Enter() override {
+        cout << "Enter Enchanted Room " << _roomNumber 
+             << " (Shining with blue magic aura)" << endl;
+    }
+};
+
+class EnchantedDoor : public Door {
+public:
+    // 参数类型可以是 EnchantedRoom*，但基类构造函数接受 Room*，自动向上转型
+    EnchantedDoor(EnchantedRoom* r1, EnchantedRoom* r2) 
+        : Door(r1, r2) {}
+
+    void Enter() override {
+        cout << "Open a Magic Door (Whispering a glowing incantation)" << endl;
+    }
+};
+
+class EnchantedMazeFactory : public MazeFactory {
+public:
+    // 返回基类指针，但实际创建派生类对象
+    Room* MakeRoom(int n) const override {
+        return new EnchantedRoom(n);
+    }
+
+    Door* MakeDoor(Room* r1, Room* r2) const override {
+        // 注意：这里参数类型是 Room*，但我们知道它实际是 EnchantedRoom*
+        // 为了安全，可以动态转换，但简单起见直接强制转换（因为工厂保证类型匹配）
+        return new EnchantedDoor(
+            static_cast<EnchantedRoom*>(r1),
+            static_cast<EnchantedRoom*>(r2)
+        );
+    }
+};
+
+// ======================== Dungeon 主题 ========================
+class DungeonRoom : public Room {
+public:
+    DungeonRoom(int n) : Room(n) {}
+
+    void Enter() override {
+        cout << "Enter Dungeon Room " << _roomNumber 
+             << " (Cold, damp and dark)" << endl;
+    }
+};
+
+class DungeonDoor : public Door {
+public:
+    DungeonDoor(DungeonRoom* r1, DungeonRoom* r2) 
+        : Door(r1, r2) {}
+
+    void Enter() override {
+        cout << "Open a Heavy Iron Door (Creaking loudly with rust)" << endl;
+    }
+};
+
+class DungeonMazeFactory : public MazeFactory {
+public:
+    Room* MakeRoom(int n) const override {
+        return new DungeonRoom(n);
+    }
+
+    Door* MakeDoor(Room* r1, Room* r2) const override {
+        return new DungeonDoor(
+            static_cast<DungeonRoom*>(r1),
+            static_cast<DungeonRoom*>(r2)
+        );
+    }
+};
+
+// ======================== MazeGame 客户端 ========================
+// ======================== Enchanted 主题 ========================
+class EnchantedRoom : public Room {
+public:
+    // 直接调用基类构造函数，无需手动初始化 _sides
+    EnchantedRoom(int n) : Room(n) {}
+
+    // 重写 Enter（加上 override 是好习惯，但不必须）
+    void Enter() override {
+        cout << "Enter Enchanted Room " << _roomNumber 
+             << " (Shining with blue magic aura)" << endl;
+    }
+};
+
+class EnchantedDoor : public Door {
+public:
+    // 参数类型可以是 EnchantedRoom*，但基类构造函数接受 Room*，自动向上转型
+    EnchantedDoor(EnchantedRoom* r1, EnchantedRoom* r2) 
+        : Door(r1, r2) {}
+
+    void Enter() override {
+        cout << "Open a Magic Door (Whispering a glowing incantation)" << endl;
+    }
+};
+
+class EnchantedMazeFactory : public MazeFactory {
+public:
+    // 返回基类指针，但实际创建派生类对象
+    Room* MakeRoom(int n) const override {
+        return new EnchantedRoom(n);
+    }
+
+    Door* MakeDoor(Room* r1, Room* r2) const override {
+        // 注意：这里参数类型是 Room*，但我们知道它实际是 EnchantedRoom*
+        // 为了安全，可以动态转换，但简单起见直接强制转换（因为工厂保证类型匹配）
+        return new EnchantedDoor(
+            static_cast<EnchantedRoom*>(r1),
+            static_cast<EnchantedRoom*>(r2)
+        );
+    }
+};
+
+// ======================== Dungeon 主题 ========================
+class DungeonRoom : public Room {
+public:
+    DungeonRoom(int n) : Room(n) {}
+
+    void Enter() override {
+        cout << "Enter Dungeon Room " << _roomNumber 
+             << " (Cold, damp and dark)" << endl;
+    }
+};
+
+class DungeonDoor : public Door {
+public:
+    DungeonDoor(DungeonRoom* r1, DungeonRoom* r2) 
+        : Door(r1, r2) {}
+
+    void Enter() override {
+        cout << "Open a Heavy Iron Door (Creaking loudly with rust)" << endl;
+    }
+};
+
+class DungeonMazeFactory : public MazeFactory {
+public:
+    Room* MakeRoom(int n) const override {
+        return new DungeonRoom(n);
+    }
+
+    Door* MakeDoor(Room* r1, Room* r2) const override {
+        return new DungeonDoor(
+            static_cast<DungeonRoom*>(r1),
+            static_cast<DungeonRoom*>(r2)
+        );
+    }
+};
+
+// ======================== MazeGame 客户端 ========================
+class MazeGame {
+public:
+    Maze* CreateMaze(MazeFactory& factory) {
+        // 1. 创建迷宫
+        Maze* maze = factory.MakeMaze();
+
+        // 2. 创建两个房间（编号 1 和 2）
+        Room* room1 = factory.MakeRoom(1);
+        Room* room2 = factory.MakeRoom(2);
+
+        // 3. 创建连接这两个房间的门
+        Door* door = factory.MakeDoor(room1, room2);
+
+        // 4. 设置门的方向：房间1的东侧是门，房间2的西侧是门
+        //    （Direction 枚举通常定义 East = 2, West = 3，这里直接用符号）
+        room1->SetSide(East, door);
+        room2->SetSide(West, door);
+
+        // 5. 将房间和门加入迷宫
+        maze->AddRoom(room1);
+        maze->AddRoom(room2);
+        maze->AddDoor(door);
+
+        // 6. 返回迷宫指针
+        return maze;
+    }
+};
+```
+
+
+```C++
+class EnchantedRoom:public Room{
+public:
+    EnchantedRoom(int n) : _roomNumber(n) {
+        for (int i = 0; i < 4; ++i)
+            _sides[i] = NULL;
+    }
+    void Enter(){    cout<<"Enter Enchanted Room <"<<_roomNumber<<"> (Shining with blue magic aura)"<<endl;}
+};
+class EnchantedDoor:public Door{
+public:
+    EnchantedDoor(EnchantedRoom* r1, EnchantedRoom* r2) : _room1(r1), _room2(r2) {}
+    void Enter(){    cout<<"Open a Magic Door (Whispering a glowing incantation)"<<endl;}
+};
+class EnchantedMazeFactory:public MazeFactory{
+public:
+    Room* MakeRoom(int n) const { return new EnchantedRoom(n); }
+    Door* MakeDoor(EnchantedRoom* r1, EnchantedRoom* r2) const { return new EnchantedDoor(r1, r2); }
+    ~EnchantedMazeFactory() {}
+};
+
+
+class DungeonRoom:public Room{
+public:
+    DungeonRoom(int n) : _roomNumber(n) {
+        for (int i = 0; i < 4; ++i)
+            _sides[i] = NULL;
+    }
+    void Enter(){    cout<<"Enter Dungeon Room <"<<_roomNumber<<"> (Cold, damp and dark)"<<endl;}
+};
+class DungeonDoor:public Door{
+public:
+    DungeonDoor(DungeonRoom* r1, DungeonRoom* r2) : _room1(r1), _room2(r2) {}
+    void Enter(){    cout<<"Open a Heavy Iron Door (Creaking loudly with rust)"<<endl;}
+};
+class DungeonMazeFactory:public MazeFactory{
+public:
+    Room* MakeRoom(int n) const { return new DungeonRoom(n); }
+    Door* MakeDoor(DungeonRoom* r1, DungeonRoom* r2) const { return new DungeonDoor(r1, r2); }
+    ~DungeonMazeFactory() {}
+};
+
+template<class T>
+class MazeGame{
+public:
+    Maze* CreateMaze(MazeFactory& factory){
+        T m=factory.MakeMaze();
+        Room Room1=m.MakeRoom(1);
+        Room Room2=m.MakeRoom(2);
+        Door Door=m.MakeDoor(Room1,Room2);
+        Room1.SetSide(2,*Room2._sides);
+        Room2.SetSide(4,*Room1._sides);
+        m.AddRoom(Room1);
+        m.AddRoom(Room2);
+        m.AddDoor(Door);
+        return *m;
+    }
+};
 ```
