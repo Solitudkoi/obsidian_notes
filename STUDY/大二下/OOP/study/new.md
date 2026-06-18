@@ -115,7 +115,7 @@ int main() {
 ```C++
 output:Derived
 
-p是多态变量，要构造的是Derived类，但是Derived是Base的子类，然后因为Base没有声明构造函数，所以new的时候先调用Base的默认构造函数然后调用Derived自己的构造函数，析构的时候会先调用Derived自己的析构函数（但是derived类内没有声明析构函数，程序就会调用自动默认析构函数）然后因为Base的析构函数是虚函数，所以不会调用。
+p是多态变量，要构造的是Derived类，但是Derived是Base的子类，然后因为Base没有声明构造函数，所以new的时候先调用Base的默认构造函数然后调用Derived自己的构造函数，析构的时候（为了内存安全起见，基类的析构函数都应该是虚函数）先析构派生类再析构基类，然后在这个程序里
 然后p->print();因为p是Derived类，而且Base的print()是虚函数，所以会直接调用Derived的print()函数；如果Base里的是void print() { cout << "Base"; }输出就会是Base而不会输出Derived了
 ```
 - **有 `virtual`**：动态绑定，看实际对象类型（`Derived`）→ 输出 `Derived`。
