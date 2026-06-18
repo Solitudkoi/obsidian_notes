@@ -88,3 +88,41 @@ throw 扔出一个值后不会直接跳回上一层的，而是将throw出的值
 test(1);---> throw 1;---> catch (int e)符合int型---> cout << "Int";
 test(0);---> throw "Zero";---> catch (...) ---> cout << "Other";
 ```
+
+
+```C++
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void print() { cout << "Base"; }
+    virtual ~Base() {}
+};
+
+class Derived : public Base {
+public:
+    void print() { cout << "Derived"; }
+};
+
+int main() {
+    Base* p = new Derived();
+    p->print();
+    delete p;
+    return 0;
+}
+```
+```C++
+output:Derived
+
+p是多态变量，而且Base里的构造和析构函数都是虚函数，所以new的时候调用的是Derived自己的构造函数，析构的时候也是（但是derived类内没有声明析构函数，程序就会调用自动默认析构函数
+```
+
+```C++
+
+```
+```C++
+output:
+
+
+```
