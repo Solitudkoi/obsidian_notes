@@ -173,7 +173,7 @@ public:
     // 构造函数（默认参数 NULL）
     MyString(const char* str = NULL) {
         if (str == NULL) {                     // ① 判断空指针
-            m_data = new char[1];
+		    m_data = new char[1];             //从这个 1 看出来的
             *m_data = '\0';
             m_size = 0;
         } else {
@@ -249,6 +249,8 @@ int main() {
 output:
 OOP!
 Exception: Position out of bounds
+
+构造函数（new）申请的资源，必须在析构函数（delete）中释放。
 ```
 
 
