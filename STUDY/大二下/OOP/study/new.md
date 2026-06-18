@@ -27,5 +27,7 @@ int main() {
 }
 ```
 ```C++
-output:
+output:BD~D~B
+
+如果改为virtual ~Base() { cout << "~B"; }运行结果就是BD~B
 ```
