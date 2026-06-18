@@ -256,10 +256,74 @@ Exception: Position out of bounds
 
 
 ```C++
+#include <iostream>
+using namespace std;
 
+template<typename T>
+class SharedPtr {
+private:
+    T* ptr;
+    int* ref_count;
+public:
+    SharedPtr(T* p = NULL) {
+        if (p == NULL) {
+            ptr = NULL;
+            ref_count = NULL;           // ①
+        } else {
+            ptr = p;
+            ref_count = new int(1);     // ②
+        }
+    }
+
+    SharedPtr(const SharedPtr<T>& other) {
+        ptr = other.ptr;
+        ref_count = other.ref_count;
+        if (ref_count) {
+            (*ref_count)++;             // ③
+        }
+    }
+
+    ~SharedPtr() {
+        if (ref_count) {
+            (*ref_count)--;             // ④
+            if (*ref_count == 0) {
+                delete ptr;             // ⑤
+                delete ref_count;       // ⑥
+            }
+        }
+    }
+
+    T& operator*() {    //T* ptr;---> prt是指针，所以返回prt就是T*类型了
+        return *ptr;                    // ⑦
+    }
+
+    T* operator->() {   //T* ptr;---> prt是指针，所以返回prt就是T*类型了
+        return ptr;                     // ⑧
+    }
+};
+
+struct Node {
+    int value;
+    Node(int v) : value(v) {
+        cout << "Node(" << value << ") created. ";
+    }
+    ~Node() {
+        cout << "Node(" << value << ") destroyed. ";
+    }
+};
+
+int main() {
+    SharedPtr<Node> sp1(new Node(42)); 
+    {
+        SharedPtr<Node> sp2 = sp1;
+        cout << "Value: " << sp2->value << ". ";
+    }
+    cout << "Still alive: " << (*sp1).value << ". ";
+    return 0;
+}
 ```
 ```C++
-output:
+output:Node(42) created. Value: 42. Still alive: 42. Node(42) destroyed. 
 
 
 ```
