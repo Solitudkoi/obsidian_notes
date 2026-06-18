@@ -157,14 +157,98 @@ output:7 5
 ```
 
 
+### 程序填空
 
 ```C++
+#include <cstring>
+#include <iostream>
+#include <stdexcept>
+using namespace std;
 
+class MyString {
+private:
+    char* m_data;
+    size_t m_size;
+public:
+    // 构造函数（默认参数 NULL）
+    MyString(const char* str = NULL) {
+        if (str == NULL) {                     // ① 判断空指针
+            m_data = new char[1];
+            *m_data = '\0';
+            m_size = 0;
+        } else {
+            m_size = strlen(str);
+            m_data = new char[m_size + 1];     // ② 分配空间（含 '\0'）
+            strcpy(m_data, str);
+        }
+    }
+    
+    // 拷贝构造函数（深拷贝）
+    MyString(const MyString& other) {
+        m_size = other.m_size;
+        m_data = new char[m_size + 1];
+        strcpy(m_data, other.m_data);          // ③ 复制内容
+    }
+    
+    // 赋值运算符（深拷贝 + 自赋值检查）
+    MyString& operator=(const MyString& other) {
+        if (this != &other) {                  // ④ 自赋值判断
+            delete[] m_data;
+            m_size = other.m_size;
+            m_data = new char[m_size + 1];
+            strcpy(m_data, other.m_data);
+        }
+        return *this;                          // ⑤ 返回自身引用
+    }
+    
+    // 析构函数（释放内存）
+    ~MyString() {
+        delete[] m_data;                       // ⑥ 释放数组内存
+    }
+
+    // 在指定位置插入一个字符
+    void insert(size_t pos, char c) {
+        if (pos > m_size) {                    // ⑦ 非法位置（大于长度）
+            throw std::out_of_range("Position out of bounds"); // ⑧ 抛出异常
+        }
+        char* newData = new char[m_size + 2];
+        strncpy(newData, m_data, pos);
+        newData[pos] = c;
+        strcpy(newData + pos + 1, m_data + pos);
+        delete[] m_data;
+        m_data = newData;
+        m_size++;
+    }
+    
+    // 打印字符串（若非空）
+    void print() const {
+        if (m_data) cout << m_data << endl;
+    }
+};
+
+int main() {
+    try {
+        MyString s1("OOP");
+        MyString s2 = s1;
+        MyString s3;
+        s3 = s2;
+        
+        s3.insert(3, '!');   // 在末尾插入 '!'，变为 "OOP!"
+        s3.print();          // 输出 OOP!
+
+        s3 = s3;             // 自赋值，安全跳过
+        
+        s3.insert(10, '?');  // 位置 10 超出长度 4，抛出异常
+    } catch (const std::exception& e) {
+        cout << "Exception: " << e.what() << endl; // 捕获并打印异常信息
+    }
+    return 0;
+}
 ```
 ```C++
 output:
-
-
+OOP!
+Exception: Position out of bounds
 ```
 
 
