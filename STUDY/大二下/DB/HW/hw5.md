@@ -1,17 +1,3 @@
-5.24
-
-Consider the relation, r, shown in Figure 5.22. Give the result of the following
-```
-query:
-
-select building, room number, time slot id, count(*)
-
-from r
-
-group by rollup (building, room number, time slot id)
-```
-
-![[Pasted image 20260421185947.png]]
 6.1
 
 Construct an E-R diagram for a car insurance company whose customers own
