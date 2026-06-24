@@ -32,6 +32,24 @@
 	b. Find the total sum of all loan amounts in the bank.
 	c. Find the names of all branches that have assets greater than those of at least one branch located in “Brooklyn”.
 ![[Pasted image 20260324132914.png]]
+
+```
+with brooklyn_branch as (
+    select branch_name
+    from branch
+    where branch_city = 'Brooklyn'
+)
+select ID, customer_name
+from customer
+where not exists(
+    select branch_name from brooklyn_branch
+    except
+    select branch_name from account join depositor on account.account_number = depositor.account_number
+    where customer.ID = depositor.ID
+);
+```
+
+
 ## 3.15 c
 
 **找出资产大于至少一个 Brooklyn 支行资产的所有支行名**
