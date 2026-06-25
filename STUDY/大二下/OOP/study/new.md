@@ -2,6 +2,7 @@
 ![[Pasted image 20260616151106.png]]
 ![[Pasted image 20260616235725.png]]
 
+![[Pasted image 20260625140211.png]]
 
 
 What happens if an exception is thrown in a C++ program but is never caught by any `catch` block?
