@@ -606,7 +606,7 @@ $$CPI_{total} = CPI_{base} + (\text{远程访问频率}) \times (\text{每次远
 ---
 
 ### Q31. 监听 vs 目录 一致性协议处理访存请求示例
-
+Please provide examples to showcase how a multicore system processes a sequence of memory access requests with correct coherence-state transition using the Snooping-based coherence protocol and the directory-based coherence protocol. The examples should specify system features such as core count, cache organization, and initial cache states per core.
 **系统设定：** 3 个核 P0/P1/P2，各有一个私有写回(write-back) cache，**MSI 协议**（Modified / Shared / Invalid），单块 A 初始只在内存，三核均为 **I**。
 
 **访存序列：**
