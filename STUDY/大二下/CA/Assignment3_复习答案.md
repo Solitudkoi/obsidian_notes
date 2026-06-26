@@ -508,7 +508,7 @@ I4: MUL.D F6,F10,F8  (WAW on F6 与 I2；RAW on F8 与 I3)
 ---
 
 ### Q26. 向量执行时间如何计算？取决于什么？为何链接(chaining)能优化？
-
+How to compute vector execution time? What factors does it depend on? Why does chaining helps to optimize vector execution time?
 **关键概念：**
 - **Convoy（车队）**：一组**可一起开始执行、彼此无结构/数据冒险**的向量指令。
 - **Chime（钟鸣）**：执行一个 convoy 所需的时间单位 ≈ **向量长度 n 个周期**（忽略启动开销）。
