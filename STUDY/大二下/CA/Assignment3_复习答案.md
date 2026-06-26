@@ -6,6 +6,97 @@
 
 ---
 
+Introduction to Computer Architecture
+Assignment 3
+Due June 30, 2026
+Grading Policy: 
+The ultimate goal for all presentation and assignments is review and understand.
+Assignment 3 aims for a comprehensive coverage of textbook materials for exam 
+preparation.
+Only (self-chosen) five questions of Assignment 3 are required (100 = 20 x 5). 
+Please specify the five questions you would like to use for grading.
+You are highly encouraged to understand and answer the remaining questions 
+toward a comprehensive review for the final exam.
+Embrace now.
+Good luck.
+
+***CHAPTER 1 - FUNDAMENTAL***
+01. What are the two critical performance techniques featured by the RISC 
+architecture? Please explain also how they help to improve performance.
+02. What are the key observations by the Denard Scaling Law and the Moore’s law. 
+Please explain also why they cease applying to more advanced CPU designs.
+03. What is the conclusion of the Amdahl’s Law. Please provide examples of using the 
+Amdahl’s Law to compute speedup for a program with one or more portions of 
+parallelism-enhanced code.
+04. What are the four classes of parallel architectures? Please provide also example 
+design techniques if any for each class.
+05. Please provide examples of memory addressing modes to showcase the usage of 
+registers, immediates, and displacements.
+06. What are the three impacts for computer cost to cease even without technology 
+improvement?
+07. Please provide an example to showcase the differences among faults, failures, and 
+errors in a system.
+08. How to computer MTTF of the entire system with subsystems each having 
+respective MTTFs?
+09. Please summarize the key design principles of RAID 0 through RAID 6.
+10. Please list the equations for processor performance such as CPU time, CPI, IPC, 
+and Clock Cycles. Please explain also how clock cycle time, CPI, and instruction 
+count affect CPU time.
+***APPENDIX B & CHAPTER 2 - MEMORY HIERARCHY***
+11. What are the design principles of direct mapped, fully associative, and set 
+associative cache organization?
+12. Please provide examples to showcase address mapping policies in different types 
+of cache organization. You may consider a byte-addressed system for example. 
+The examples should also specify which memory addresses to access, cache size, 
+block size, and cache associativity, and explain how to use such factors to 
+accurately map a memory address to a cache set or a cache line.
+13. Please provide various versions of equations for computing average memory 
+access time given a single-level cache and a multi-level cache.
+14. Please provide the key ideas for various cache optimization techniques and how 
+they affect performance such as hit rate, miss rate, hit time, access latency, miss 
+penalty, and power consumption.
+15. Please describe the process of address translation given a two-level cache with the 
+help of TLB.
+***APPENDIX A & APPENDIX C & CHAPTER 3 - ILP***
+16. What are the three types of dependences?
+17. What are the common types of hazards? Please explain also the relationship 
+between data dependence and data hazard.
+18. What are commonly used forwarding solutions to deal with data hazards?
+19. Please provide examples of commonly used branch predictors and analyze their 
+properties about whether one or more branches are considered and about the 
+storage cost.
+20. Please explain the idea of superscalar and how it helps to increase IPC or decrease 
+CPI.
+21. Please describe the concrete operations (especially about when and how different 
+types of hazards are processed) in each step for Scoreboarding, Tomasulo’s 
+Algorithm, and Tomasulo’s Algorithm with speculation.
+22. Please provide a sequence of instructions, then determine the timelines for 
+different dynamic-scheduling algorithms to pipeline them. Please specify also
+necessary assumptions such as whether forwarding is supported, whether certain 
+operations (such as issuing an instruction and capturing a broadcast result) can be 
+executed in the same cycle.
+***CHAPTER 4 - DLP***
+23. What are the three types of commonly used DLP architectures?
+24. What are the working principles of the vector architecture?
+25. What is the key idea of dynamic register typing?
+26. How to compute vector execution time? What factors does it depend on? Why 
+does chaining helps to optimize vector execution time?
+27. Please provide an example to showcase how stride affects memory access latency 
+in a system with multi-banked memory.
+28. Please provide an example program to showcase loop-carried dependences and 
+how to rewrite this program to eliminate such dependences.
+***CHAPTER 5 - TLP***
+29. How does communication cost in a multicore system affect system performance?
+30. What is the condition for a memory system to be coherent?
+31. Please provide examples to showcase how a multicore system processes a 
+sequence of memory access requests with correct coherence-state transition using 
+the Snooping-based coherence protocol and the directory-based coherence 
+protocol. The examples should specify system features such as core count, cache 
+organization, and initial cache states per core.
+32. Please specify the types of orderings required by different types of consistency 
+policies.
+
+---
 ## 第一章 — 基础（Fundamental）
 
 ### Q01. RISC 的两个关键性能技术
