@@ -138,6 +138,8 @@ with the slide's specific penalty — send me that number and I'll match it exac
 
 ## Q22. Dynamic-scheduling timeline (Tomasulo) — course's own instruction sequence
 
+Please provide a sequence of instructions, then determine the timelines for different dynamic-scheduling algorithms to pipeline them. Please specify also necessary assumptions such as whether forwarding is supported, whether certain operations (such as issuing an instruction and capturing a broadcast result) can be executed in the same cycle.
+
 **Instruction sequence:**
 ```
 1:  div x2, x3, x4
