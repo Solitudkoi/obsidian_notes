@@ -1,5 +1,5 @@
 # Computer Architecture — Assignment 3
-## English Answers for Q3, Q12, Q22, Q26, Q31 (the five "exam big-problem" questions)
+## English Answers for Q3, Q12, Q13, Q22, Q26, Q31 (the exam big-problem questions)
 
 > Worked examples are aligned to this course's actual exam parameters (from your lecture
 > slides / past papers), so each answer doubles as 大题 practice.
@@ -8,7 +8,10 @@
 
 ## Q3. Amdahl's Law — conclusion and speedup computation
 
-**Conclusion.** The overall speedup obtained by improving one part of a system is limited bythe fraction of time that part is actually used. No matter how fast you make that part, the*unimproved* portion bounds the total gain. (This is the quantitative basis for "make thecommon case fast.")
+**Conclusion.** The overall speedup obtained by improving one part of a system is limited by
+the fraction of time that part is actually used. No matter how fast you make that part, the
+*unimproved* portion bounds the total gain. (This is the quantitative basis for "make the
+common case fast.")
 
 **Single enhanced portion:**
 $$\text{Speedup} = \frac{1}{(1-f) + \dfrac{f}{s}}, \qquad \lim_{s\to\infty}\text{Speedup} = \frac{1}{1-f}$$
@@ -25,7 +28,9 @@ Even with $s\to\infty$ the ceiling is only $1/0.4 = 2.5$.
 **Example 2 (two portions).** 30% sped up 2×, 20% sped up 5×, remaining 50% unchanged:
 $$\text{Speedup} = \frac{1}{0.5 + \dfrac{0.3}{2} + \dfrac{0.2}{5}} = \frac{1}{0.69} \approx 1.45$$
 
-**Example 3 (reverse-solve — common exam variant).** *"What fraction of a program must beparallelizable to reach an overall speedup of 5 on a machine with infinitely many processors?"* With $s\to\infty$, $\text{Speedup}=1/(1-f)$, so
+**Example 3 (reverse-solve — common exam variant).** *"What fraction of a program must be
+parallelizable to reach an overall speedup of 5 on a machine with infinitely many processors?"*
+With $s\to\infty$, $\text{Speedup}=1/(1-f)$, so
 $$\frac{1}{1-f} \ge 5 \;\Rightarrow\; f \ge 0.8 \;(80\%).$$
 With a **finite** $n$ processors, set the target $S$ and solve for $f$:
 $$S = \frac{1}{(1-f) + f/n} \;\Rightarrow\; f = \frac{1 - 1/S}{1 - 1/n}.$$
@@ -88,6 +93,46 @@ $$\underbrace{\text{Tag}}\ \big|\ \underbrace{\text{Index}}\ \big|\ \underbrace{
 Key exam points: (a) the two addresses **collide in the direct-mapped L1**; (b) the dirty victim
 must be **written back** (write-back) before the new block loads; (c) with **write-allocate**, even
 a *store* miss first fetches the block.
+
+---
+
+## Q13. Average Memory Access Time (AMAT) — single-level and multi-level
+
+**Single-level cache:**
+$$\text{AMAT} = \text{Hit time} + \text{Miss rate} \times \text{Miss penalty}$$
+
+If instruction and data caches are separate, split by access type:
+$$\text{AMAT} = \%_{\text{instr}}\big(HT + MR_I \times MP\big) + \%_{\text{data}}\big(HT + MR_D \times MP\big)$$
+
+**Two-level cache (nested form, using *local* miss rates):**
+$$\text{AMAT} = HT_{L1} + MR_{L1}\Big(\underbrace{HT_{L2} + MR_{L2}^{local}\times MP_{L2}}_{\text{effective L1 miss penalty}}\Big)$$
+where $MP_{L2}$ is the L2 miss penalty (L2 → main memory).
+
+**Local vs global miss rate:**
+$$MR_{L2}^{local} = \frac{\text{misses}_{L2}}{\text{accesses}_{L2}}, \qquad
+MR_{L2}^{global} = \frac{\text{misses}_{L2}}{\text{total CPU refs}} = MR_{L1}\times MR_{L2}^{local}$$
+The **global** rate is the meaningful one for the whole hierarchy; the L2 *local* rate looks high
+only because L1 has already absorbed the easy hits.
+
+**Per-instruction / CPU-time form:**
+$$\text{Mem stall cycles/instr} = \frac{\text{mem accesses}}{\text{instr}} \times MR \times MP = \frac{\text{misses}}{\text{instr}} \times MP$$
+$$\text{CPU time} = IC \times \big(CPI_{exec} + \text{mem stall cycles/instr}\big) \times T_c$$
+
+**Worked example (this course's 1000 / 40 / 20 problem).**
+In 1000 memory references there are 40 misses in L1 and 20 misses in L2:
+- $MR_{L1}^{local} = 40/1000 = 4\%$
+- $MR_{L2}^{local} = 20/40 = 50\%$
+- $MR_{L2}^{global} = 20/1000 = 2\%$
+
+Assume $HT_{L1}=1$, $HT_{L2}=10$, $MP_{L2}=200$ cycles:
+$$\text{AMAT} = 1 + 0.04\times(10 + 0.50\times200) = 1 + 0.04\times110 = 1 + 4.4 = \boxed{5.4\ \text{cycles}}$$
+
+**Single-level baseline (for the L2 comparison).** A cache with only L1 (no L2) is computed the same
+way using the **L1 → memory** penalty:
+$$\text{AMAT}_{\text{no-L2}} = HT_{L1} + MR_{L1}\times MP_{L1\to mem}$$
+Plug in your slide's $MP_{L1\to mem}$; this baseline is larger than 5.4 — that gap is exactly what
+adding the L2 buys you. *(If your PPT shows a second value such as ≈6.6, it's this no-L2 baseline
+with the slide's specific penalty — send me that number and I'll match it exactly.)*
 
 ---
 
