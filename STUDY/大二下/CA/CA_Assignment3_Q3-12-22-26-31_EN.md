@@ -25,9 +25,7 @@ Even with $s\to\infty$ the ceiling is only $1/0.4 = 2.5$.
 **Example 2 (two portions).** 30% sped up 2×, 20% sped up 5×, remaining 50% unchanged:
 $$\text{Speedup} = \frac{1}{0.5 + \dfrac{0.3}{2} + \dfrac{0.2}{5}} = \frac{1}{0.69} \approx 1.45$$
 
-**Example 3 (reverse-solve — common exam variant).** *"What fraction of a program must be
-parallelizable to reach an overall speedup of 5 on a machine with infinitely many processors?"*
-With $s\to\infty$, $\text{Speedup}=1/(1-f)$, so
+**Example 3 (reverse-solve — common exam variant).** *"What fraction of a program must beparallelizable to reach an overall speedup of 5 on a machine with infinitely many processors?"* With $s\to\infty$, $\text{Speedup}=1/(1-f)$, so
 $$\frac{1}{1-f} \ge 5 \;\Rightarrow\; f \ge 0.8 \;(80\%).$$
 With a **finite** $n$ processors, set the target $S$ and solve for $f$:
 $$S = \frac{1}{(1-f) + f/n} \;\Rightarrow\; f = \frac{1 - 1/S}{1 - 1/n}.$$
